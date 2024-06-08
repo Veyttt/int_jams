@@ -1,13 +1,13 @@
 const { json } = require("body-parser");
 
 
-function creatematch(){
-
+function creatematch(playerID){
     
+
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = () => {
         if (xhttp.readyState == 4) {
-            console.log('Match created succesfully (200)');
+            console.log('Match created succesfully (200) match_id=' + match_id);
         }
     };
 
@@ -22,34 +22,57 @@ function creatematch(){
 }
 
 
-// function getCookie(name) {
-//     let value = "; " + document.cookie;
-//     let parts = value.split("; " + name + "=");
-//     if (parts.length === 2) return parts.pop().split(";").shift();
-// }
 
-// function sendPlayerID() {
-//     let playerID = getCookie('playerID');
-//     if (playerID) {
-//         let xhr = new XMLHttpRequest();
-//         xhr.open("POST", "/creatematch", true);
-//         xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+
+
+
+
+
+
+
+
+
+
+
+function getMatches (){
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = () => {
+        if (xhttp.readyState == 4) {
+            console.log('Matches were displayed succesful (200)');
+        }
+    };
+    var data = JSON.parse(this.responseText);
+
+
+    xhttp.open("GET", "/matches", true);
+    xhttp.setRequestHeader("Content-Type", "application/json");
+    xhttp.send(data);
+
+};
+
+// async function currentMatches() {
+//     try {
+//         const response = await fetch('/matches');
+//         const data = await response.json();
         
-//         xhr.onreadystatechange = function() {
-//             if (xhr.readyState === 4 && xhr.status === 200) {
-//                 console.log('Response received:', xhr.responseText);
-//             }
-//         };
+//         // Assuming the response has a property 'message'
+//         const newData = data.message;
 
-//         let data = JSON.stringify({ playerID: playerID });
-//         xhr.send(data);
-//     } else {
-//         console.error('playerID cookie not found');
+//         // Get the element by its ID
+//         const textElement = document.getElementById("dynamicText");
+
+//         // Set the new text content
+//         textElement.textContent = newData;
+
+
+
+//     } catch (error) {
+//         console.error('Error fetching data:', error);
 //     }
 // }
 
-// document.addEventListener("DOMContentLoaded", function() {
-//     sendPlayerID();
-// });
+
+
+
 
 

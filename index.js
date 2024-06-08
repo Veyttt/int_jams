@@ -278,7 +278,7 @@ app.get('/get_player_id', (res,req)  => {
 
 
 app.post('/createMatch', (request, response) => {
-    var playerID = request.body.playerID;
+    var playerID = request.session.playerID;
     if (!playerID){
         response.send("playerID is not set.");
         return;
@@ -323,7 +323,7 @@ app.put('/joinMatch', (request, response) =>  {
     }
 
     // We are checking if the match exists and if the player2_id is not set. Also, we are checking if the player1_id is different from the playerID since he can't join his own match.
-    connection.execute("SELECT gm.match_id, pm.playermatch_match_id FROM gamematch gm JOIN playermatch pm ON gm.match_id = pm.playermatch_match_id WHERE gm.match_id = 2 AND pm.playermatch_match_id NOT IN ( SELECT playermatch_match_id FROM playermatch GROUP BY playermatch_match_id HAVING COUNT(playermatch_match_id) > 1",
+    connection.execute("SELECT gm.match_id, pm.playermatch_match_id FROM gamematch gm JOIN playermatch pm ON gm.match_id = pm.playermatch_match_id WHERE gm.match_id = 2 AND pm.playermatch_match_id NOT IN ( SELECT playermatch_match_id FROM playermatch GROUP BY playermatch_match_id HAVING COUNT(playermatch_match_id) > 1 ('?')" 
     [match_id],
     function (err, results, fields) {
         if (err){
