@@ -1,4 +1,4 @@
-const { json } = require("body-parser");
+// const { json } = require("body-parser");
 
 
 function creatematch(playerID){
@@ -21,6 +21,55 @@ function creatematch(playerID){
     xhttp.send(JSON.stringify(data));
 }
 
+function func() {
+    console.log('we are getting matches...'); 
+    fetch('/matches')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('bad response ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Data received:', data); 
+            const lobbyList = document.getElementById('lobby-list');
+            lobbyList.innerHTML = '';  
+
+            if (data.length === 0) {
+                const listItem = document.createElement('li');
+                listItem.textContent = 'No lobbie avalible';                           
+                lobbyList.appendChild(listItem);
+            } else {
+                data.forEach(match => {
+                    console.log('Processing match:', match); 
+                    const listItem = document.createElement('li');
+
+                    
+                    const lobbyText = document.createElement('span');
+                    lobbyText.textContent = `lobby ${match.match_id}`;
+                    
+                    
+                    const joinButton = document.createElement('button');
+                    joinButton.textContent = 'Join Lobby';
+                    joinButton.classList.add('button');
+                    
+                    
+                    
+                    listItem.appendChild(lobbyText);
+                    listItem.appendChild(joinButton);
+                    lobbyList.appendChild(listItem);
+                });
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching matches:', error);
+            const lobbyList = document.getElementById('lobby-list');
+            lobbyList.innerHTML = '';
+            const listItem = document.createElement('li');
+            listItem.textContent = 'Error fetching matches. Please try again later.';
+            lobbyList.appendChild(listItem);
+        });
+}
 
 
 
@@ -33,43 +82,6 @@ function creatematch(playerID){
 
 
 
-
-function getMatches (){
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = () => {
-        if (xhttp.readyState == 4) {
-            console.log('Matches were displayed succesful (200)');
-        }
-    };
-    var data = JSON.parse(this.responseText);
-
-
-    xhttp.open("GET", "/matches", true);
-    xhttp.setRequestHeader("Content-Type", "application/json");
-    xhttp.send(data);
-
-};
-
-// async function currentMatches() {
-//     try {
-//         const response = await fetch('/matches');
-//         const data = await response.json();
-        
-//         // Assuming the response has a property 'message'
-//         const newData = data.message;
-
-//         // Get the element by its ID
-//         const textElement = document.getElementById("dynamicText");
-
-//         // Set the new text content
-//         textElement.textContent = newData;
-
-
-
-//     } catch (error) {
-//         console.error('Error fetching data:', error);
-//     }
-// }
 
 
 
