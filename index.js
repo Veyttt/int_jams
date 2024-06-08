@@ -171,37 +171,7 @@ app.get('/get_player_id', (res,req)  => {
 
 
 
-app.post('/createMatch', (request, response) => {
-    var playerID = request.body.playerID;
-    if (!playerID){
-        response.send("playerID is not set.");
-        return;
-    }
-
-    
-    connection.execute('INSERT INTO gamematch (match_name) VALUES (?)',
-        [1, playerID],
-        function (err, results, fields) {
-            if (err){
-                response.send(err);
-            }else{
-                
-                var match_id = results.insertId;
-
-                
-                connection.execute('INSERT INTO playermatch (match_id) VALUES (?,?)',
-                [playerID, match_id],
-                function (err, results, fields) {
-                    if (err){
-                        response.send("error creating match");
-                    }else{
-                        response.send("Match created. player_id: " + playerID + " and match_id: " + match_id);
-                    }
-                });
-            }
-        });
-});
-
+// 
 
 // app.put('/joinMatch', (request, response) =>  {
 //     var playerID = request.body.playerID;
@@ -300,6 +270,114 @@ app.post('/createMatch', (request, response) => {
 //             response.send(results[0]); 
 //     });   
 // });
+
+
+
+
+
+
+
+app.post('/createMatch', (request, response) => {
+    var playerID = request.body.playerID;
+    if (!playerID){
+        response.send("playerID is not set.");
+        return;
+    }
+
+    // We are inserting into the table match the match_state_id and the playerID
+    connection.execute('INSERT INTO gamematch VALUES (NULL, 0, 1, 1, 0);',
+        [],
+        function (err, results, fields) {
+            if (err){
+                response.send(err);
+            }else{
+                // We are getting the insertId after it was inserted into the table.
+                // We can use this to insert to the intermediary table player_match
+                var match_id = results.insertId;
+
+                // Insert into the intermediary table player_match the playerID and the match_id.
+                // Also, this could be done in different function to avoid callback hell. 👿
+                connection.execute('INSERT INTO playermatch VALUES (?, ?, 29, 1, 0, 0, 0, 0, 0, 0, 0);',
+                [playerID, match_id],
+                function (err, results, fields) {
+                    if (err){
+                        response.send("Opsi dopsi. 💩");
+                    }else{
+                        // ❗ At the moment we are returning text but we could send a JSON with the playerID and match_id!!! 
+                        response.send("Match created. player_id: " + playerID + " and match_id: " + match_id);
+                    }
+                });
+            }
+        });
+});
+
+// Endpoint for joining a match
+app.put('/joinMatch', (request, response) =>  {
+    var playerID = request.body.playerID;
+    var match_id = request.body.match_id;
+
+    // If playerID or matchID is not set, we send a message to the user
+    if (!playerID || !match_id){
+        response.send("Data is missing. 💩");
+        return;
+    }
+
+    // We are checking if the match exists and if the player2_id is not set. Also, we are checking if the player1_id is different from the playerID since he can't join his own match.
+    connection.execute("SELECT gm.match_id, pm.playermatch_match_id FROM gamematch gm JOIN playermatch pm ON gm.match_id = pm.playermatch_match_id WHERE gm.match_id = 2 AND pm.playermatch_match_id NOT IN ( SELECT playermatch_match_id FROM playermatch GROUP BY playermatch_match_id HAVING COUNT(playermatch_match_id) > 1",
+    [match_id],
+    function (err, results, fields) {
+        if (err){
+            response.send(err);
+        }else{
+            // If the results.length is 0 means that we don't have any match with the defined criteria.
+            if (results.length == 0){
+                response.send("No match found with id " + match_id);
+            }else{
+                // If we have a match, we update the player2_id with the playerID
+                connection.execute('INSERT INTO playermatch VALUES (?, ?, 85, 1, 0, 0, 0, 0, 0, 0, 0);',
+                [playerID, match_id],
+                function (err, results, fields) {
+                    if (err){
+                        response.send(err);
+                    }else{
+                        // ❗Again, we could return a JSON with the playerID and matchID instead of text!
+                        response.send("You joined match =" + match_id + " 💩🦄");
+                    }
+                });
+            }
+        }
+    });
+});
+
+// Endpoint for getting all matches
+app.get('/matches', (request, response) => {
+    connection.execute('SELECT * FROM gamematch ',
+    [],
+    function (err, results, fields) {
+        if (err)
+        {
+            response.send(err);
+        }else{
+            response.send(results);
+        }
+    });
+});
+
+
+
+app.get('/matches/:id', (request, response) => {
+    var Player_match_id = request.params.id;
+    connection.execute('SELECT * FROM gamematch WHERE match_id = ?',
+    [Player_match_id],
+    function (err, results, fields) {
+        if (err)
+        {
+            response.send(err);
+        }else{
+            response.send(results);
+        }
+    });
+})
 
 
 

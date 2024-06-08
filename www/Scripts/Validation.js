@@ -59,3 +59,9 @@ function try2login() {
 function redirect(){
     window.location.replace('/Login.html');
 };
+
+function hui(){
+    
+    sdfgsdg
+    
+}
