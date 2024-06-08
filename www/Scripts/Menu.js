@@ -51,7 +51,7 @@ function func() {
                     
                     const joinButton = document.createElement('button');
                     joinButton.textContent = 'Join Lobby';
-                    joinButton.classList.add('button');
+                    joinButton.classList.add('button_2');
                     
                     
                     

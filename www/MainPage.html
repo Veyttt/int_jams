@@ -8,25 +8,18 @@
 <script src="./Scripts/Menu.js"></script>
 </head>
 <body class="bg">
+
+<div style="position: absolute; right: 100px; top:300px;">
+    <button style="position: absolute; right: 100px; bottom: 100px;" type="button" class="button" onclick="creatematch()"> Create match<br>
+</div>
+        
     
-    <div class="centered" style="position: absolute; top:50%; transform: translate(-50%);">
-        <form action="/createPlayer" method="post">
-            <div style="position: absolute; right: 100px; top:300px;">
-                <button style="position: absolute; right: 100px; bottom: 600px;" type="button" class="button" onclick="creatematch()"> Create match<br>
-                <!-- <button style="position: absolute; left: 50px; bottom: 600px;" type="button" class="button" onclick="try2login()"> Create match<br>
-                <button style="position: absolute; left: 200px; bottom: 600px;" type="button" class="button" onclick="try2login()"> Create match<br>
-                <button style="position: absolute; left: 350px; bottom: 600px;" type="button" class="button" onclick="try2login()"> Create match<br>
-                <button style="position: absolute; left: 500px; bottom: 600px;" type="button" class="button" onclick="try2login()"> Create match<br> -->
-            </div>
-        </form>
-    </div>
 
-    <div class="lobby-container">
-        <h1 class="button_text" >Available Game Lobbies</h1>
-        <button class="button" id="refresh-btn" onclick="func()">Refresh List</button>   <!-- LOBBY LIST -->
-        <ul id="lobby-list"></ul>
-    </div>
-
+ <div class="lobby-container">
+     <h1 class="button_text" >Available Game Lobbies</h1>
+     <button class="button" id="refresh-btn" onclick="func()">Refresh List</button>   <!-- LOBBY LIST -->
+     <ul class="button_text" id="lobby-list"></ul>
+</div>
 
 </body>
 </html>
