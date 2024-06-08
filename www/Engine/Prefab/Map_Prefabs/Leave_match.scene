@@ -1,0 +1,56 @@
+{
+    "id": "6209f9f6-769d-4dee-99b1-6a887cf5d2c6",
+    "sceneType": "PREFAB",
+    "settings": {
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "borderWidth": 186,
+        "borderHeight": 75
+    },
+    "displayList": [
+        {
+            "type": "Container",
+            "id": "431943e8-20ee-4c2c-ab6e-2a8d5ced0c68",
+            "label": "container_1",
+            "x": 63,
+            "y": 32,
+            "list": [
+                {
+                    "type": "Image",
+                    "id": "613d4d6a-81f3-4e6e-8b39-73d3d7e5143e",
+                    "label": "button",
+                    "texture": {
+                        "key": "Button"
+                    },
+                    "x": 30,
+                    "y": 5,
+                    "scaleX": 3,
+                    "scaleY": 3,
+                    "tintTopLeft": "#de0000",
+                    "tintTopRight": "#e00000",
+                    "tintBottomLeft": "#cc0000",
+                    "tintBottomRight": "#f50000"
+                },
+                {
+                    "type": "Text",
+                    "id": "faf45ca7-dc0e-4026-8340-2737405b34e3",
+                    "label": "text_1",
+                    "x": -50,
+                    "y": -12,
+                    "text": "LeaveMatch",
+                    "fontSize": "25px",
+                    "fontStyle": "bold",
+                    "color": "#000000ff"
+                }
+            ]
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor 2D - Scene Editor",
+        "url": "https://phasereditor2d.com",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    }
+}

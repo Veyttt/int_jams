@@ -1,0 +1,88 @@
+{
+    "section1": {
+        "files": [
+            {
+                "url": "assets/60758.png",
+                "type": "image",
+                "key": "60758"
+            },
+            {
+                "url": "assets/AEsir_Ship.png",
+                "type": "image",
+                "key": "AEsir_Ship"
+            },
+            {
+                "url": "assets/arrow.png",
+                "type": "image",
+                "key": "arrow"
+            },
+            {
+                "url": "assets/Button.png",
+                "type": "image",
+                "key": "Button"
+            },
+            {
+                "url": "assets/dino.png",
+                "key": "dino",
+                "type": "image"
+            },
+            {
+                "url": "assets/earth.png",
+                "type": "image",
+                "key": "earth"
+            },
+            {
+                "url": "src/scenes/EndTurn_butt.js",
+                "type": "script",
+                "key": "EndTurn_butt"
+            },
+            {
+                "url": "Prefab/Map_Prefabs/Leave_match.js",
+                "type": "script",
+                "key": "Leave_match"
+            },
+            {
+                "url": "Prefab/Map_Prefabs/meteor.js",
+                "type": "script",
+                "key": "meteor"
+            },
+            {
+                "url": "assets/Onyxx.png",
+                "type": "image",
+                "key": "Onyxx"
+            },
+            {
+                "url": "Prefab/Player_prefabs/P1_pf.js",
+                "type": "script",
+                "key": "P1_pf"
+            },
+            {
+                "url": "Prefab/Player_prefabs/P2_pf.js",
+                "type": "script",
+                "key": "P2_pf"
+            },
+            {
+                "url": "assets/square.png",
+                "type": "image",
+                "key": "square"
+            },
+            {
+                "url": "Prefab/Map_Prefabs/Tile.js",
+                "type": "script",
+                "key": "Tile"
+            },
+            {
+                "url": "assets/updated_meteor.png",
+                "type": "image",
+                "key": "updated_meteor"
+            }
+        ]
+    },
+    "meta": {
+        "app": "Phaser Editor 2D - Asset Pack Editor",
+        "contentType": "phasereditor2d.pack.core.AssetContentType",
+        "url": "https://phasereditor2d.com",
+        "version": 2,
+        "showAllFilesInBlocks": false
+    }
+}
