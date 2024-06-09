@@ -10,6 +10,35 @@
     },
     "displayList": [
         {
+            "type": "Image",
+            "id": "d655ae5f-a314-48e5-9200-59bd4919466d",
+            "label": "sprite_0001",
+            "texture": {
+                "key": "3333"
+            },
+            "x": 639,
+            "y": 357,
+            "tintTopLeft": "#787878",
+            "tintTopRight": "#ffd5f7",
+            "tintBottomLeft": "#787878",
+            "tintBottomRight": "#787878"
+        },
+        {
+            "type": "Rectangle",
+            "id": "ee8bcf2d-71e4-47cf-a35b-dd8162a61ae1",
+            "label": "rectangle_3",
+            "x": 647,
+            "y": 382,
+            "scaleX": 12,
+            "scaleY": 10,
+            "visible": false,
+            "isFilled": true,
+            "fillColor": "#000000",
+            "fillAlpha": 0.51,
+            "width": 128,
+            "height": 128
+        },
+        {
             "prefabId": "a8929f0e-117d-4874-9bb8-a80053ed7de8",
             "id": "ceb3121a-f9e2-4f5f-9fcc-47e41506670c",
             "unlock": [
@@ -496,12 +525,14 @@
                 "x",
                 "y",
                 "angle",
-                "tile_id"
+                "tile_id",
+                "is_it_win"
             ],
             "label": "tile_42",
             "useGameObjectName": true,
             "scope": "CLASS",
             "tile_id": 42,
+            "is_it_win": true,
             "x": 885,
             "y": 230,
             "angle": 0
@@ -512,12 +543,14 @@
             "unlock": [
                 "x",
                 "y",
-                "tile_id"
+                "tile_id",
+                "is_it_win"
             ],
             "label": "tile_41",
             "useGameObjectName": true,
             "scope": "CLASS",
             "tile_id": 41,
+            "is_it_win": true,
             "x": 820,
             "y": 230
         },
@@ -591,12 +624,14 @@
             "unlock": [
                 "x",
                 "y",
-                "tile_id"
+                "tile_id",
+                "is_it_win"
             ],
             "label": "tile_39",
             "useGameObjectName": true,
             "scope": "CLASS",
             "tile_id": 39,
+            "is_it_win": true,
             "x": 690,
             "y": 230
         },
@@ -607,12 +642,14 @@
                 "x",
                 "y",
                 "angle",
-                "tile_id"
+                "tile_id",
+                "is_it_win"
             ],
             "label": "tile_40",
             "useGameObjectName": true,
             "scope": "CLASS",
             "tile_id": 40,
+            "is_it_win": true,
             "x": 755,
             "y": 230,
             "angle": 0
@@ -624,12 +661,14 @@
                 "x",
                 "y",
                 "angle",
-                "tile_id"
+                "tile_id",
+                "is_it_win"
             ],
             "label": "tile_38",
             "useGameObjectName": true,
             "scope": "CLASS",
             "tile_id": 38,
+            "is_it_win": true,
             "x": 625,
             "y": 230,
             "angle": 0
@@ -767,12 +806,14 @@
                 "x",
                 "y",
                 "angle",
-                "tile_id"
+                "tile_id",
+                "is_it_win"
             ],
             "label": "tile_52",
             "useGameObjectName": true,
             "scope": "CLASS",
             "tile_id": 52,
+            "is_it_win": true,
             "x": 625,
             "y": 295,
             "angle": 0
@@ -784,12 +825,14 @@
                 "x",
                 "y",
                 "angle",
-                "tile_id"
+                "tile_id",
+                "is_it_win"
             ],
             "label": "tile_54",
             "useGameObjectName": true,
             "scope": "CLASS",
             "tile_id": 54,
+            "is_it_win": true,
             "x": 755,
             "y": 295,
             "angle": 0
@@ -800,12 +843,14 @@
             "unlock": [
                 "x",
                 "y",
-                "tile_id"
+                "tile_id",
+                "is_it_win"
             ],
             "label": "tile_53",
             "useGameObjectName": true,
             "scope": "CLASS",
             "tile_id": 53,
+            "is_it_win": true,
             "x": 690,
             "y": 295
         },
@@ -815,12 +860,14 @@
             "unlock": [
                 "x",
                 "y",
-                "tile_id"
+                "tile_id",
+                "is_it_win"
             ],
             "label": "tile_55",
             "useGameObjectName": true,
             "scope": "CLASS",
             "tile_id": 55,
+            "is_it_win": true,
             "x": 820,
             "y": 295
         },
@@ -831,12 +878,14 @@
                 "x",
                 "y",
                 "angle",
-                "tile_id"
+                "tile_id",
+                "is_it_win"
             ],
             "label": "tile_56",
             "useGameObjectName": true,
             "scope": "CLASS",
             "tile_id": 56,
+            "is_it_win": true,
             "x": 885,
             "y": 295,
             "angle": 0
@@ -944,12 +993,14 @@
                 "x",
                 "y",
                 "angle",
-                "tile_id"
+                "tile_id",
+                "is_it_win"
             ],
             "label": "tile_70",
             "useGameObjectName": true,
             "scope": "CLASS",
             "tile_id": 70,
+            "is_it_win": true,
             "x": 885,
             "y": 360,
             "angle": 0
@@ -960,12 +1011,14 @@
             "unlock": [
                 "x",
                 "y",
-                "tile_id"
+                "tile_id",
+                "is_it_win"
             ],
             "label": "tile_69",
             "useGameObjectName": true,
             "scope": "CLASS",
             "tile_id": 69,
+            "is_it_win": true,
             "x": 820,
             "y": 360
         },
@@ -1039,12 +1092,14 @@
             "unlock": [
                 "x",
                 "y",
-                "tile_id"
+                "tile_id",
+                "is_it_win"
             ],
             "label": "tile_67",
             "useGameObjectName": true,
             "scope": "CLASS",
             "tile_id": 67,
+            "is_it_win": true,
             "x": 690,
             "y": 360
         },
@@ -1055,12 +1110,14 @@
                 "x",
                 "y",
                 "angle",
-                "tile_id"
+                "tile_id",
+                "is_it_win"
             ],
             "label": "tile_68",
             "useGameObjectName": true,
             "scope": "CLASS",
             "tile_id": 68,
+            "is_it_win": true,
             "x": 755,
             "y": 360,
             "angle": 0
@@ -1072,12 +1129,14 @@
                 "x",
                 "y",
                 "angle",
-                "tile_id"
+                "tile_id",
+                "is_it_win"
             ],
             "label": "tile_66",
             "useGameObjectName": true,
             "scope": "CLASS",
             "tile_id": 66,
+            "is_it_win": true,
             "x": 625,
             "y": 360,
             "angle": 0
@@ -1215,12 +1274,14 @@
                 "x",
                 "y",
                 "angle",
-                "tile_id"
+                "tile_id",
+                "is_it_win"
             ],
             "label": "tile_80",
             "useGameObjectName": true,
             "scope": "CLASS",
             "tile_id": 80,
+            "is_it_win": true,
             "x": 625,
             "y": 425,
             "angle": 0
@@ -1232,12 +1293,14 @@
                 "x",
                 "y",
                 "angle",
-                "tile_id"
+                "tile_id",
+                "is_it_win"
             ],
             "label": "tile_82",
             "useGameObjectName": true,
             "scope": "CLASS",
             "tile_id": 82,
+            "is_it_win": true,
             "x": 755,
             "y": 425,
             "angle": 0
@@ -1248,12 +1311,14 @@
             "unlock": [
                 "x",
                 "y",
-                "tile_id"
+                "tile_id",
+                "is_it_win"
             ],
             "label": "tile_81",
             "useGameObjectName": true,
             "scope": "CLASS",
             "tile_id": 81,
+            "is_it_win": true,
             "x": 690,
             "y": 425
         },
@@ -1279,12 +1344,14 @@
                 "x",
                 "y",
                 "angle",
-                "tile_id"
+                "tile_id",
+                "is_it_win"
             ],
             "label": "tile_84",
             "useGameObjectName": true,
             "scope": "CLASS",
             "tile_id": 84,
+            "is_it_win": true,
             "x": 885,
             "y": 425,
             "angle": 0
@@ -1503,12 +1570,14 @@
                 "x",
                 "y",
                 "angle",
-                "tile_id"
+                "tile_id",
+                "is_it_win"
             ],
             "label": "tile_94",
             "useGameObjectName": true,
             "scope": "CLASS",
             "tile_id": 94,
+            "is_it_win": true,
             "x": 625,
             "y": 490,
             "angle": 0
@@ -1519,12 +1588,14 @@
             "unlock": [
                 "x",
                 "y",
-                "tile_id"
+                "tile_id",
+                "is_it_win"
             ],
             "label": "tile_95",
             "useGameObjectName": true,
             "scope": "CLASS",
             "tile_id": 95,
+            "is_it_win": true,
             "x": 690,
             "y": 490
         },
@@ -1551,12 +1622,14 @@
             "unlock": [
                 "x",
                 "y",
-                "tile_id"
+                "tile_id",
+                "is_it_win"
             ],
             "label": "tile_97",
             "useGameObjectName": true,
             "scope": "CLASS",
             "tile_id": 97,
+            "is_it_win": true,
             "x": 820,
             "y": 490
         },
@@ -1567,12 +1640,14 @@
                 "x",
                 "y",
                 "angle",
-                "tile_id"
+                "tile_id",
+                "is_it_win"
             ],
             "label": "tile_98",
             "useGameObjectName": true,
             "scope": "CLASS",
             "tile_id": 98,
+            "is_it_win": true,
             "x": 885,
             "y": 490,
             "angle": 0
@@ -2044,6 +2119,22 @@
             "visible": true
         },
         {
+            "type": "Rectangle",
+            "id": "95a3d50e-6757-4a6f-8245-3f678b4d5dd7",
+            "label": "rectangle_2",
+            "x": 754,
+            "y": 360,
+            "scaleX": 2.5,
+            "scaleY": 2.5,
+            "isFilled": true,
+            "fillColor": "#db0000",
+            "fillAlpha": 0.2,
+            "strokeColor": "#ff1414",
+            "lineWidth": 1.5,
+            "width": 128,
+            "height": 128
+        },
+        {
             "type": "Image",
             "id": "578136be-4e75-4c2e-92ce-6adc6fcee587",
             "label": "earth",
@@ -2054,54 +2145,158 @@
             "y": 357
         },
         {
-            "prefabId": "80b8df02-7b95-4b6a-84e8-07d0a1e5d887",
-            "id": "a1c469af-95e6-4b30-88bd-168484b96dd4",
-            "unlock": [
-                "x",
-                "y",
-                "hitArea.shape",
-                "hitArea.x",
-                "hitArea.y",
-                "hitArea.width",
-                "hitArea.height",
-                "hitArea.radius",
-                "hitArea.points",
-                "hitArea.alphaTolerance"
-            ],
-            "label": "endTurn_butt",
-            "scope": "CLASS",
-            "hitArea.shape": "RECTANGLE",
-            "hitArea.x": -94.5,
-            "hitArea.y": -37.5,
-            "hitArea.width": 189,
-            "hitArea.height": 75,
-            "x": 1020,
-            "y": 110
+            "type": "Rectangle",
+            "id": "f727c9c4-ab93-4ce0-98cb-cf18a4969c00",
+            "label": "rectangle_1",
+            "x": 1075,
+            "y": 364,
+            "scaleX": 2.3,
+            "scaleY": 3,
+            "fillColor": "#1bffe7",
+            "strokeColor": "#14ffff",
+            "lineWidth": 1.5,
+            "isStroked": true,
+            "width": 128,
+            "height": 128
         },
         {
-            "prefabId": "6209f9f6-769d-4dee-99b1-6a887cf5d2c6",
-            "id": "fd744582-f179-42d1-b16f-accbe582570a",
+            "prefabId": "221ac983-3678-4489-8017-d0fbe6e706e5",
+            "id": "1657b634-3a46-4e9e-85ce-116914497f22",
             "unlock": [
                 "x",
                 "y",
-                "hitArea.shape",
-                "hitArea.x",
-                "hitArea.y",
-                "hitArea.width",
-                "hitArea.height",
-                "hitArea.radius",
-                "hitArea.points",
-                "hitArea.alphaTolerance"
+                "scaleX",
+                "scaleY"
             ],
-            "label": "leave_match",
+            "label": "meteor_prefab",
             "scope": "CLASS",
-            "hitArea.shape": "RECTANGLE",
-            "hitArea.x": -64.5,
-            "hitArea.y": -32.5,
-            "hitArea.width": 189,
-            "hitArea.height": 75,
-            "x": 994,
-            "y": 607
+            "x": 1141,
+            "y": 340,
+            "scaleX": 1.2,
+            "scaleY": 1.2
+        },
+        {
+            "prefabId": "6a6a98bd-192f-4111-abe4-833e048fc18f",
+            "id": "b2c0aa58-2f2a-43d7-982e-0725171bee43",
+            "unlock": [
+                "x",
+                "y",
+                "scaleX",
+                "scaleY",
+                "visible"
+            ],
+            "label": "blackHole_prefab",
+            "scope": "CLASS",
+            "x": 1010,
+            "y": 250,
+            "scaleX": 1.2,
+            "scaleY": 1.2,
+            "visible": true
+        },
+        {
+            "prefabId": "138acd1e-3288-4ef8-8555-ec1ecae6dfa5",
+            "id": "b2cdc76c-1327-49ac-8510-e708f97d2280",
+            "unlock": [
+                "x",
+                "y",
+                "scaleX",
+                "scaleY",
+                "visible"
+            ],
+            "label": "cassetteBreak_prefab",
+            "scope": "CLASS",
+            "x": 1010,
+            "y": 340,
+            "scaleX": 1.2,
+            "scaleY": 1.2,
+            "visible": true
+        },
+        {
+            "prefabId": "495d5035-0f09-4b75-afe0-3e30dee02e7a",
+            "id": "43657a46-0ff8-49df-a557-1aca9c775fdc",
+            "unlock": [
+                "x",
+                "y",
+                "scaleX",
+                "scaleY",
+                "visible"
+            ],
+            "label": "remoteControl_prefab",
+            "scope": "CLASS",
+            "x": 1072,
+            "y": 430,
+            "scaleX": 1.2,
+            "scaleY": 1.2,
+            "visible": true
+        },
+        {
+            "prefabId": "5099b145-b546-4071-9f0b-a5ce1c2b3614",
+            "id": "ed05b7c8-b526-4fd7-8463-f7aa113c70cc",
+            "unlock": [
+                "x",
+                "y",
+                "scaleX",
+                "scaleY",
+                "visible"
+            ],
+            "label": "stopSign_prefab",
+            "scope": "CLASS",
+            "x": 1140,
+            "y": 250,
+            "scaleX": 1.2,
+            "scaleY": 1.2,
+            "visible": true
+        },
+        {
+            "type": "Rectangle",
+            "id": "14151f4a-8f81-4526-a4ea-c420a0a50340",
+            "label": "rectangle",
+            "x": 754,
+            "y": 360,
+            "scaleX": 2.5,
+            "scaleY": 2.5,
+            "fillColor": "#1bffe7",
+            "strokeColor": "#ff1414",
+            "strokeAlpha": 0.7,
+            "lineWidth": 1.5,
+            "isStroked": true,
+            "width": 128,
+            "height": 128
+        },
+        {
+            "type": "Text",
+            "id": "a9192885-4944-443d-a37b-23d9a4c553ca",
+            "label": "text_2",
+            "x": 830,
+            "y": 213,
+            "text": "Target",
+            "fontSize": "20px",
+            "fontStyle": "bold",
+            "color": "#ff7e7eff"
+        },
+        {
+            "prefabId": "11a223d7-2969-4146-83ba-071294d73fd4",
+            "id": "32a7a34e-af44-4990-ac48-e3d805aa1a6f",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "leave_match_button",
+            "scope": "CLASS",
+            "x": 1077,
+            "y": 613
+        },
+        {
+            "prefabId": "5d620881-9471-4590-b61e-777b02a78cdd",
+            "id": "f9f24ac2-4ef3-4b87-924e-92a96bfea40e",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "end_turn_button_pf",
+            "scope": "CLASS",
+            "x": 1062,
+            "y": 111
         }
     ],
     "plainObjects": [],

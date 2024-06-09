@@ -1,26 +1,26 @@
 {
-    "id": "a8929f0e-117d-4874-9bb8-a80053ed7de8",
+    "id": "495d5035-0f09-4b75-afe0-3e30dee02e7a",
     "sceneType": "PREFAB",
     "settings": {
         "preloadMethodName": "",
         "preloadPackFiles": [],
         "createMethodName": "",
-        "borderWidth": 64,
-        "borderHeight": 64
+        "borderWidth": 128,
+        "borderHeight": 128
     },
     "displayList": [
         {
             "type": "Image",
-            "id": "72149012-c419-430e-942a-abf71403dfaa",
-            "label": "square",
+            "id": "285b1b94-0e89-4302-8d7c-ca4dbc703d67",
+            "label": "remoteControl",
             "hitArea.shape": "RECTANGLE",
-            "hitArea.width": 64,
-            "hitArea.height": 64,
+            "hitArea.width": 128,
+            "hitArea.height": 128,
             "texture": {
-                "key": "square"
+                "key": "RemoteControl"
             },
-            "x": 32,
-            "y": 32
+            "x": 64,
+            "y": 64
         }
     ],
     "plainObjects": [],
@@ -32,18 +32,18 @@
     },
     "prefabProperties": [
         {
-            "name": "tile_id",
-            "label": "Tile_id",
+            "name": "cassette_id",
+            "label": "Cassette_id",
             "tooltip": "",
-            "defValue": 0,
+            "defValue": 1,
             "customDefinition": false,
             "type": {
                 "id": "number"
             }
         },
         {
-            "name": "is_it_win",
-            "label": "Is_it_win",
+            "name": "haveCassette",
+            "label": "HaveCassette",
             "tooltip": "",
             "defValue": false,
             "customDefinition": false,

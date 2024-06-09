@@ -3,12 +3,12 @@
 
 /* START OF COMPILED CODE */
 
-class Tile extends Phaser.GameObjects.Image {
+class BlackHole_prefab extends Phaser.GameObjects.Image {
 
 	constructor(scene, x, y, texture, frame) {
-		super(scene, x ?? 32, y ?? 32, texture || "square", frame);
+		super(scene, x ?? 64, y ?? 64, texture || "BlackHole", frame);
 
-		this.setInteractive(new Phaser.Geom.Rectangle(0, 0, 64, 64), Phaser.Geom.Rectangle.Contains);
+		this.setInteractive(new Phaser.Geom.Rectangle(0, 0, 128, 128), Phaser.Geom.Rectangle.Contains);
 
 		/* START-USER-CTR-CODE */
 		// Write your code here.
@@ -16,9 +16,9 @@ class Tile extends Phaser.GameObjects.Image {
 	}
 
 	/** @type {number} */
-	tile_id = 0;
+	cassette_id = 1;
 	/** @type {boolean} */
-	is_it_win = false;
+	haveCassette = false;
 
 	/* START-USER-CODE */
 

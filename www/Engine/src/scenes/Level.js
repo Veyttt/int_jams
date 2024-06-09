@@ -14,6 +14,22 @@ class Level extends Phaser.Scene {
 	/** @returns {void} */
 	editorCreate() {
 
+		// sprite_0001
+		const sprite_0001 = this.add.image(639, 357, "3333");
+		sprite_0001.tintTopLeft = 7895160;
+		sprite_0001.tintTopRight = 16766455;
+		sprite_0001.tintBottomLeft = 7895160;
+		sprite_0001.tintBottomRight = 7895160;
+
+		// rectangle_3
+		const rectangle_3 = this.add.rectangle(647, 382, 128, 128);
+		rectangle_3.scaleX = 12;
+		rectangle_3.scaleY = 10;
+		rectangle_3.visible = false;
+		rectangle_3.isFilled = true;
+		rectangle_3.fillColor = 0;
+		rectangle_3.fillAlpha = 0.51;
+
 		// tile_1
 		const tile_1 = new Tile(this, 40, 100);
 		this.add.existing(tile_1);
@@ -712,20 +728,84 @@ class Level extends Phaser.Scene {
 		p2_pf.scaleY = 0.9;
 		p2_pf.visible = true;
 
+		// rectangle_2
+		const rectangle_2 = this.add.rectangle(754, 360, 128, 128);
+		rectangle_2.scaleX = 2.5;
+		rectangle_2.scaleY = 2.5;
+		rectangle_2.isFilled = true;
+		rectangle_2.fillColor = 14352384;
+		rectangle_2.fillAlpha = 0.2;
+		rectangle_2.strokeColor = 16716820;
+		rectangle_2.lineWidth = 1.5;
+
 		// earth
 		this.add.image(768, 357, "earth");
 
-		// endTurn_butt
-		const endTurn_butt = new EndTurn_butt(this, 1020, 110);
-		this.add.existing(endTurn_butt);
-		endTurn_butt.removeInteractive();
-		endTurn_butt.setInteractive(new Phaser.Geom.Rectangle(-94.5, -37.5, 189, 75), Phaser.Geom.Rectangle.Contains);
+		// rectangle_1
+		const rectangle_1 = this.add.rectangle(1075, 364, 128, 128);
+		rectangle_1.scaleX = 2.3;
+		rectangle_1.scaleY = 3;
+		rectangle_1.fillColor = 1834983;
+		rectangle_1.isStroked = true;
+		rectangle_1.strokeColor = 1376255;
+		rectangle_1.lineWidth = 1.5;
 
-		// leave_match
-		const leave_match = new Leave_match(this, 994, 607);
-		this.add.existing(leave_match);
-		leave_match.removeInteractive();
-		leave_match.setInteractive(new Phaser.Geom.Rectangle(-64.5, -32.5, 189, 75), Phaser.Geom.Rectangle.Contains);
+		// meteor_prefab
+		const meteor_prefab = new Meteor_prefab(this, 1141, 340);
+		this.add.existing(meteor_prefab);
+		meteor_prefab.scaleX = 1.2;
+		meteor_prefab.scaleY = 1.2;
+
+		// blackHole_prefab
+		const blackHole_prefab = new BlackHole_prefab(this, 1010, 250);
+		this.add.existing(blackHole_prefab);
+		blackHole_prefab.scaleX = 1.2;
+		blackHole_prefab.scaleY = 1.2;
+		blackHole_prefab.visible = true;
+
+		// cassetteBreak_prefab
+		const cassetteBreak_prefab = new CassetteBreak_prefab(this, 1010, 340);
+		this.add.existing(cassetteBreak_prefab);
+		cassetteBreak_prefab.scaleX = 1.2;
+		cassetteBreak_prefab.scaleY = 1.2;
+		cassetteBreak_prefab.visible = true;
+
+		// remoteControl_prefab
+		const remoteControl_prefab = new RemoteControl_prefab(this, 1072, 430);
+		this.add.existing(remoteControl_prefab);
+		remoteControl_prefab.scaleX = 1.2;
+		remoteControl_prefab.scaleY = 1.2;
+		remoteControl_prefab.visible = true;
+
+		// stopSign_prefab
+		const stopSign_prefab = new StopSign_prefab(this, 1140, 250);
+		this.add.existing(stopSign_prefab);
+		stopSign_prefab.scaleX = 1.2;
+		stopSign_prefab.scaleY = 1.2;
+		stopSign_prefab.visible = true;
+
+		// rectangle
+		const rectangle = this.add.rectangle(754, 360, 128, 128);
+		rectangle.scaleX = 2.5;
+		rectangle.scaleY = 2.5;
+		rectangle.fillColor = 1834983;
+		rectangle.isStroked = true;
+		rectangle.strokeColor = 16716820;
+		rectangle.strokeAlpha = 0.7;
+		rectangle.lineWidth = 1.5;
+
+		// text_2
+		const text_2 = this.add.text(830, 213, "", {});
+		text_2.text = "Target";
+		text_2.setStyle({ "color": "#ff7e7eff", "fontSize": "20px", "fontStyle": "bold" });
+
+		// leave_match_button
+		const leave_match_button = new end_turn_button(this, 1077, 613);
+		this.add.existing(leave_match_button);
+
+		// end_turn_button_pf
+		const end_turn_button_pf = new End_turn_button_pf(this, 1062, 111);
+		this.add.existing(end_turn_button_pf);
 
 		// lists
 		const list_tile = [tile_121, tile_122, tile_124, tile_123, tile_126, tile_125, tile_118, tile_117, tile_120, tile_119, tile_116, tile_115, tile_114, tile_113, tile_85, tile_86, tile_88, tile_87, tile_112, tile_111, tile_109, tile_110, tile_108, tile_107, tile_103, tile_104, tile_91, tile_92, tile_90, tile_89, tile_93, tile_94, tile_96, tile_95, tile_106, tile_105, tile_101, tile_102, tile_97, tile_98, tile_100, tile_99, tile_57, tile_58, tile_60, tile_59, tile_84, tile_83, tile_81, tile_82, tile_80, tile_79, tile_75, tile_76, tile_63, tile_64, tile_62, tile_61, tile_65, tile_66, tile_68, tile_67, tile_78, tile_77, tile_73, tile_74, tile_69, tile_70, tile_72, tile_71, tile_29, tile_30, tile_32, tile_31, tile_56, tile_55, tile_53, tile_54, tile_52, tile_51, tile_47, tile_48, tile_35, tile_36, tile_34, tile_33, tile_37, tile_38, tile_40, tile_39, tile_50, tile_49, tile_45, tile_46, tile_41, tile_42, tile_44, tile_43, tile_15, tile_16, tile_14, tile_13, tile_18, tile_17, tile_21, tile_22, tile_11, tile_12, tile_10, tile_9, tile_5, tile_6, tile_8, tile_7, tile_20, tile_19, tile_23, tile_24, tile_26, tile_25, tile_27, tile_28, tile_3, tile_4, tile_2, tile_1];
@@ -822,9 +902,11 @@ class Level extends Phaser.Scene {
 
 		// tile_42 (prefab fields)
 		tile_42.tile_id = 42;
+		tile_42.is_it_win = true;
 
 		// tile_41 (prefab fields)
 		tile_41.tile_id = 41;
+		tile_41.is_it_win = true;
 
 		// tile_46 (prefab fields)
 		tile_46.tile_id = 46;
@@ -840,12 +922,15 @@ class Level extends Phaser.Scene {
 
 		// tile_39 (prefab fields)
 		tile_39.tile_id = 39;
+		tile_39.is_it_win = true;
 
 		// tile_40 (prefab fields)
 		tile_40.tile_id = 40;
+		tile_40.is_it_win = true;
 
 		// tile_38 (prefab fields)
 		tile_38.tile_id = 38;
+		tile_38.is_it_win = true;
 
 		// tile_37 (prefab fields)
 		tile_37.tile_id = 37;
@@ -873,18 +958,23 @@ class Level extends Phaser.Scene {
 
 		// tile_52 (prefab fields)
 		tile_52.tile_id = 52;
+		tile_52.is_it_win = true;
 
 		// tile_54 (prefab fields)
 		tile_54.tile_id = 54;
+		tile_54.is_it_win = true;
 
 		// tile_53 (prefab fields)
 		tile_53.tile_id = 53;
+		tile_53.is_it_win = true;
 
 		// tile_55 (prefab fields)
 		tile_55.tile_id = 55;
+		tile_55.is_it_win = true;
 
 		// tile_56 (prefab fields)
 		tile_56.tile_id = 56;
+		tile_56.is_it_win = true;
 
 		// tile_31 (prefab fields)
 		tile_31.tile_id = 31;
@@ -906,9 +996,11 @@ class Level extends Phaser.Scene {
 
 		// tile_70 (prefab fields)
 		tile_70.tile_id = 70;
+		tile_70.is_it_win = true;
 
 		// tile_69 (prefab fields)
 		tile_69.tile_id = 69;
+		tile_69.is_it_win = true;
 
 		// tile_74 (prefab fields)
 		tile_74.tile_id = 74;
@@ -924,12 +1016,15 @@ class Level extends Phaser.Scene {
 
 		// tile_67 (prefab fields)
 		tile_67.tile_id = 67;
+		tile_67.is_it_win = true;
 
 		// tile_68 (prefab fields)
 		tile_68.tile_id = 68;
+		tile_68.is_it_win = true;
 
 		// tile_66 (prefab fields)
 		tile_66.tile_id = 66;
+		tile_66.is_it_win = true;
 
 		// tile_65 (prefab fields)
 		tile_65.tile_id = 65;
@@ -957,18 +1052,22 @@ class Level extends Phaser.Scene {
 
 		// tile_80 (prefab fields)
 		tile_80.tile_id = 80;
+		tile_80.is_it_win = true;
 
 		// tile_82 (prefab fields)
 		tile_82.tile_id = 82;
+		tile_82.is_it_win = true;
 
 		// tile_81 (prefab fields)
 		tile_81.tile_id = 81;
+		tile_81.is_it_win = true;
 
 		// tile_83 (prefab fields)
 		tile_83.tile_id = 83;
 
 		// tile_84 (prefab fields)
 		tile_84.tile_id = 84;
+		tile_84.is_it_win = true;
 
 		// tile_59 (prefab fields)
 		tile_59.tile_id = 59;
@@ -1011,18 +1110,22 @@ class Level extends Phaser.Scene {
 
 		// tile_94 (prefab fields)
 		tile_94.tile_id = 94;
+		tile_94.is_it_win = true;
 
 		// tile_95 (prefab fields)
 		tile_95.tile_id = 95;
+		tile_95.is_it_win = true;
 
 		// tile_96 (prefab fields)
 		tile_96.tile_id = 96;
 
 		// tile_97 (prefab fields)
 		tile_97.tile_id = 97;
+		tile_97.is_it_win = true;
 
 		// tile_98 (prefab fields)
 		tile_98.tile_id = 98;
+		tile_98.is_it_win = true;
 
 		// tile_99 (prefab fields)
 		tile_99.tile_id = 99;
@@ -1236,8 +1339,13 @@ class Level extends Phaser.Scene {
 		this.tile_126 = tile_126;
 		this.p1_pf = p1_pf;
 		this.p2_pf = p2_pf;
-		this.endTurn_butt = endTurn_butt;
-		this.leave_match = leave_match;
+		this.meteor_prefab = meteor_prefab;
+		this.blackHole_prefab = blackHole_prefab;
+		this.cassetteBreak_prefab = cassetteBreak_prefab;
+		this.remoteControl_prefab = remoteControl_prefab;
+		this.stopSign_prefab = stopSign_prefab;
+		this.leave_match_button = leave_match_button;
+		this.end_turn_button_pf = end_turn_button_pf;
 		this.list_tile = list_tile;
 
 		this.events.emit("scene-awake");
@@ -1499,10 +1607,20 @@ class Level extends Phaser.Scene {
 	p1_pf;
 	/** @type {P2_pf} */
 	p2_pf;
-	/** @type {EndTurn_butt} */
-	endTurn_butt;
-	/** @type {Leave_match} */
-	leave_match;
+	/** @type {Meteor_prefab} */
+	meteor_prefab;
+	/** @type {BlackHole_prefab} */
+	blackHole_prefab;
+	/** @type {CassetteBreak_prefab} */
+	cassetteBreak_prefab;
+	/** @type {RemoteControl_prefab} */
+	remoteControl_prefab;
+	/** @type {StopSign_prefab} */
+	stopSign_prefab;
+	/** @type {end_turn_button} */
+	leave_match_button;
+	/** @type {End_turn_button_pf} */
+	end_turn_button_pf;
 	/** @type {Tile[]} */
 	list_tile;
 
@@ -1523,36 +1641,303 @@ class Level extends Phaser.Scene {
 		});
 
 
+/////////////////////////////////////////////////////////////////////
+this.meteor_prefab.setInteractive();
+this.meteor_prefab.on('pointerover', () => {
+    this.tweens.add({
+        targets: this.meteor_prefab,
+        scale: 1.2,
+        duration: 300,
+        ease: 'Power2'
+    });
+});
+this.meteor_prefab.on('pointerout', () => {
+    this.tweens.add({
+        targets: this.meteor_prefab,                        // METEOR CASSETTE BUTTON
+        scale: 1,
+        duration: 300,
+        ease: 'Power2'
+    });
+});
+this.meteor_prefab.on('pointerdown', () => {
+console.log('meteor pushed')
+this.meteor_prefab.setTint(0x6effe2); 
+})
 
-		this.endTurn_butt.setInteractive();
+this.meteor_prefab.on('pointerup', ()=> {
+this.meteor_prefab.setTint(0xffffff); 
+console.log('meteor unpushed');
+});
+//////////////////////////////////////////////////////////////////////
 
 
-		// this.endTurn_butt.on('pointerover', ()=> {
-		// this.endTurn_butt.setTint(0x00ff00); 
+
+
+//////////////////////////////////////////////////////////////////////
+this.blackHole_prefab.setInteractive();
+this.blackHole_prefab.on('pointerover', () => {
+    this.tweens.add({
+        targets: this.blackHole_prefab,
+        scale: 1.2,
+        duration: 300,
+        ease: 'Power2'
+    });
+});
+this.blackHole_prefab.on('pointerout', () => {
+    this.tweens.add({
+        targets: this.blackHole_prefab,                            // BLACK_HOLE CASSETTE BUTTON
+        scale: 1,
+        duration: 300,
+        ease: 'Power2'
+    });
+});
+this.blackHole_prefab.on('pointerdown', () => {
+console.log('black_hole pushed')
+this.blackHole_prefab.setTint(0x6effe2); 
+})
+this.blackHole_prefab.on('pointerup', ()=> {
+this.blackHole_prefab.setTint(0xffffff); 
+console.log('black_hole unpushed');
+});
+////////////////////////////////////////////////////////////////////
+
+
+////////////////////////////////////////////////////////////////////
+this.stopSign_prefab.setInteractive();
+this.stopSign_prefab.on('pointerover', () => {
+    this.tweens.add({
+        targets: this.stopSign_prefab,
+        scale: 1.2,
+        duration: 300,
+        ease: 'Power2'
+    });
+});
+this.stopSign_prefab.on('pointerout', () => {
+    this.tweens.add({
+        targets: this.stopSign_prefab,                            // STOP_SIGN CASSETTE BUTTON
+        scale: 1,
+        duration: 300,
+        ease: 'Power2'
+    });
+});
+this.stopSign_prefab.on('pointerdown', () => {
+console.log('stop_sign pushed')
+this.stopSign_prefab.setTint(0x6effe2); 
+})
+this.stopSign_prefab.on('pointerup', ()=> {
+this.stopSign_prefab.setTint(0xffffff); 
+console.log('stop_sign unpushed');
+});
+////////////////////////////////////////////////////////////////////
+
+
+////////////////////////////////////////////////////////////////////
+this.cassetteBreak_prefab.setInteractive();
+this.cassetteBreak_prefab.on('pointerover', () => {
+    this.tweens.add({
+        targets: this.cassetteBreak_prefab,
+        scale: 1.2,
+        duration: 300,
+        ease: 'Power2'
+    });
+});
+this.cassetteBreak_prefab.on('pointerout', () => {
+    this.tweens.add({
+        targets: this.cassetteBreak_prefab,                             // CASSETTE_BREAK CASSETTE BUTTON
+        scale: 1,
+        duration: 300,
+        ease: 'Power2'
+    });
+});
+this.cassetteBreak_prefab.on('pointerdown', () => {
+console.log('cassette_break pushed')
+this.cassetteBreak_prefab.setTint(0x6effe2); 
+})
+this.cassetteBreak_prefab.on('pointerup', ()=> {
+this.cassetteBreak_prefab.setTint(0xffffff); 
+console.log('cassette_break unpushed');
+});
+///////////////////////////////////////////////////////////////////
+
+
+///////////////////////////////////////////////////////////////////
+this.remoteControl_prefab.setInteractive();
+this.remoteControl_prefab.on('pointerover', () => {
+    this.tweens.add({
+        targets: this.remoteControl_prefab,
+        scale: 1.2,
+        duration: 300,
+        ease: 'Power2'
+    });
+});
+this.remoteControl_prefab.on('pointerout', () => {
+    this.tweens.add({
+        targets: this.remoteControl_prefab,                               // REMOTE_CONTROL CASSETTE BUTTON
+        scale: 1,
+        duration: 300,
+        ease: 'Power2'
+    });
+});
+this.remoteControl_prefab.on('pointerdown', () => {
+console.log('remote_control pushed')
+this.remoteControl_prefab.setTint(0x6effe2); 
+})
+this.remoteControl_prefab.on('pointerup', ()=> {
+this.remoteControl_prefab.setTint(0xffffff); 
+console.log('remote_control unpushed');
+});
+//////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////
+this.leave_match_button.setInteractive();
+this.leave_match_button.on('pointerover', () => {
+	this.leave_match_button.setTint(0xffcc00); 
+
+    this.tweens.add({
+        targets: this.leave_match_button,
+        scale: 1.2,
+        duration: 300,
+        ease: 'Power2'
+    });
+});
+this.leave_match_button.on('pointerout', () => {
+
+	this.leave_match_button.setTint(0xffffff); 
+
+
+    this.tweens.add({
+        targets: this.leave_match_button,                               // LEAVE MATCH BUTTON
+        scale: 1,
+        duration: 300,
+        ease: 'Power2'
+    });
+
+});
+this.leave_match_button.on('pointerdown', () => {
+console.log('remote_control pushed')
+this.leave_match_button.setTint(0xff7300); 
+})
+this.leave_match_button.on('pointerup', ()=> {
+this.leave_match_button.setTint(0xffffff); 
+console.log('remote_control unpushed');
+});
+//////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////
+
+this.end_turn_button_pf.setInteractive();
+this.end_turn_button_pf.on('pointerover', () => {
+	this.end_turn_button_pf.setTint(0xffcc00); 
+
+    this.tweens.add({
+        targets: this.end_turn_button_pf,
+        scale: 1.2,
+        duration: 300,
+        ease: 'Power2'
+    });
+});
+this.end_turn_button_pf.on('pointerout', () => {
+
+	this.end_turn_button_pf.setTint(0xffffff); 
+
+
+    this.tweens.add({
+        targets: this.end_turn_button_pf,                               //  END TURN BUTTON
+        scale: 1,
+        duration: 300,
+        ease: 'Power2'
+    });
+
+});
+
+
+this.end_turn_button_pf.on('pointerdown', () => {
+console.log('remote_control pushed')
+this.end_turn_button_pf.setTint(0xff7300); 
+})
+this.end_turn_button_pf.on('pointerup', ()=> {
+this.end_turn_button_pf.setTint(0xffffff); 
+console.log('remote_control unpushed');
+});
+////////////////////////////////////////////////////////////////
+
+
+
+
+
+		// this.endTurn_butt.setInteractive();
+
+
+		// // this.endTurn_butt.on('pointerover', ()=> {
+		// // this.endTurn_butt.setTint(0x00ff00); 
+		// // });
+		// // this.endTurn_butt.on('pointerout', ()=> {
+		// // 	this.endTurn_butt.setTint(0xE0FFFF); 
+		// //  });
+		// // this.endTurn_butt.on('pointerup', ()=> {
+		// // 	console.log('button unpushed');
+		// // });
+		// this.endTurn_butt.on('pointerdown', ()=> {
+		// 	this.EndTurn();
+		// 	// this.endTurn_butt.setTint(0xfff00); 
 		// });
-		// this.endTurn_butt.on('pointerout', ()=> {
-		// 	this.endTurn_butt.setTint(0xE0FFFF); 
-		//  });
-		// this.endTurn_butt.on('pointerup', ()=> {
-		// 	console.log('button unpushed');
-		// });
-		this.endTurn_butt.on('pointerdown', ()=> {
-			this.EndTurn();
-			// this.endTurn_butt.setTint(0xfff00); 
-		});
-		// this.endTurn_butt.on('pointerup', ()=> {
-		// 	this.endTurn_butt.setTint(0xffff00); 
-		// });
+		// // this.endTurn_butt.on('pointerup', ()=> {
+		// // 	this.endTurn_butt.setTint(0xffff00); 
+		// // });
 
 		this.getPlayersPositions()
-
+		this.p1_pf.setInteractive();
+		this.p1_pf.on('pointerover', () => {
+			this.p1_pf.setTint(0x0fefff); 
+		
+			this.tweens.add({
+				targets: this.p1_pf,
+				scale: 1.2,
+				duration: 300,
+				ease: 'Power2'
+			});
+		});
+		this.p1_pf.on('pointerout', () => {
+			this.p1_pf.setTint(0xffffff); 
+			this.tweens.add({
+				targets: this.p1_pf,                               //  END TURN BUTTON
+				scale: 1,
+				duration: 300,
+				ease: 'Power2'
+			});
+		
+		});
 		this.p1_pf.on('pointerdown', () => {
 			if (this.p1_pf.playerOwner)
 				console.log('you can move the ship!')
 			else
 				console.log('nonono you cant move this.')
 		})
+
+
+		this.p2_pf.setInteractive();
+		this.p2_pf.on('pointerover', () => {
+			this.p2_pf.setTint(0x0fefff); 
 		
+			this.tweens.add({
+				targets: this.p2_pf,
+				scale: 1.2,
+				duration: 300,
+				ease: 'Power2'
+			});
+		});
+		this.p2_pf.on('pointerout', () => {
+			this.p2_pf.setTint(0xffffff); 
+			this.tweens.add({
+				targets: this.p2_pf,                               //  END TURN BUTTON
+				scale: 1,
+				duration: 300,
+				ease: 'Power2'
+			});
+		
+		});
 		this.p2_pf.on('pointerdown', () => {
 			if (this.p2_pf.playerOwner)
 				console.log('you can move the ship!')
@@ -1706,25 +2091,7 @@ class Level extends Phaser.Scene {
 /* END OF COMPILED CODE */
 
 // You can write more code here
-this.endTurn_butt.setInteractive();
 
-
-		this.endTurn_butt.on('pointerover', ()=> {
-		this.endTurn_butt.setTint(0x00ff00); 
-		});
-		this.endTurn_butt.on('pointerout', ()=> {
-			this.endTurn_butt.setTint(0xE0FFFF); 
-		 });
-		this.endTurn_butt.on('pointerup', ()=> {
-			console.log('button unpushed');
-		});
-		this.endTurn_butt.on('pointerdown', ()=> {
-			this.EndTurn();
-			this.endTurn_butt.setTint(0xfff00); 
-		});
-		this.endTurn_butt.on('pointerup', ()=> {
-			this.endTurn_butt.setTint(0xffff00); 
-		});
 
 
 

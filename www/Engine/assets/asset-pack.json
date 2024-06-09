@@ -2,6 +2,16 @@
     "section1": {
         "files": [
             {
+                "url": "assets/2222.png",
+                "type": "image",
+                "key": "2222"
+            },
+            {
+                "url": "assets/3333.png",
+                "type": "image",
+                "key": "3333"
+            },
+            {
                 "url": "assets/60758.png",
                 "type": "image",
                 "key": "60758"
@@ -17,9 +27,29 @@
                 "key": "arrow"
             },
             {
+                "url": "assets/BlackHole.png",
+                "type": "image",
+                "key": "BlackHole"
+            },
+            {
+                "url": "Prefab/Cassette_prefabs/BlackHole_prefab.js",
+                "type": "script",
+                "key": "BlackHole_prefab"
+            },
+            {
                 "url": "assets/Button.png",
                 "type": "image",
                 "key": "Button"
+            },
+            {
+                "url": "assets/CassetteBreak.png",
+                "type": "image",
+                "key": "CassetteBreak"
+            },
+            {
+                "url": "Prefab/Cassette_prefabs/CassetteBreak_prefab.js",
+                "type": "script",
+                "key": "CassetteBreak_prefab"
             },
             {
                 "url": "assets/dino.png",
@@ -32,9 +62,24 @@
                 "key": "earth"
             },
             {
+                "url": "Prefab/Map_Prefabs/end_turn_button.js",
+                "type": "script",
+                "key": "end_turn_button"
+            },
+            {
+                "url": "Prefab/Map_Prefabs/End_turn_button_pf.js",
+                "type": "script",
+                "key": "End_turn_button_pf"
+            },
+            {
                 "url": "src/scenes/EndTurn_butt.js",
                 "type": "script",
                 "key": "EndTurn_butt"
+            },
+            {
+                "url": "assets/EndTurnButton.png",
+                "type": "image",
+                "key": "EndTurnButton"
             },
             {
                 "url": "Prefab/Map_Prefabs/Leave_match.js",
@@ -42,9 +87,29 @@
                 "key": "Leave_match"
             },
             {
+                "url": "assets/LeaveMatchButton.png",
+                "type": "image",
+                "key": "LeaveMatchButton"
+            },
+            {
                 "url": "Prefab/Map_Prefabs/meteor.js",
                 "type": "script",
                 "key": "meteor"
+            },
+            {
+                "url": "assets/Meteor.png",
+                "type": "image",
+                "key": "Meteor"
+            },
+            {
+                "url": "Prefab/Cassette_prefabs/Meteor_prefab.js",
+                "type": "script",
+                "key": "Meteor_prefab"
+            },
+            {
+                "url": "assets/milkyway.png",
+                "type": "image",
+                "key": "milkyway"
             },
             {
                 "url": "assets/Onyxx.png",
@@ -62,9 +127,34 @@
                 "key": "P2_pf"
             },
             {
+                "url": "assets/RemoteControl.png",
+                "type": "image",
+                "key": "RemoteControl"
+            },
+            {
+                "url": "Prefab/Cassette_prefabs/RemoteControl_prefab.js",
+                "type": "script",
+                "key": "RemoteControl_prefab"
+            },
+            {
+                "url": "assets/Sprite-0001.png",
+                "type": "image",
+                "key": "Sprite-0001"
+            },
+            {
                 "url": "assets/square.png",
                 "type": "image",
                 "key": "square"
+            },
+            {
+                "url": "assets/StopSign.png",
+                "type": "image",
+                "key": "StopSign"
+            },
+            {
+                "url": "Prefab/Cassette_prefabs/StopSign_prefab.js",
+                "type": "script",
+                "key": "StopSign_prefab"
             },
             {
                 "url": "Prefab/Map_Prefabs/Tile.js",

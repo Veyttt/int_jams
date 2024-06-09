@@ -3,22 +3,17 @@
 
 /* START OF COMPILED CODE */
 
-class Tile extends Phaser.GameObjects.Image {
+class end_turn_button extends Phaser.GameObjects.Image {
 
 	constructor(scene, x, y, texture, frame) {
-		super(scene, x ?? 32, y ?? 32, texture || "square", frame);
+		super(scene, x ?? 93, y ?? 37, texture || "LeaveMatchButton", frame);
 
-		this.setInteractive(new Phaser.Geom.Rectangle(0, 0, 64, 64), Phaser.Geom.Rectangle.Contains);
+		this.setInteractive(new Phaser.Geom.Rectangle(0, 0, 186, 75), Phaser.Geom.Rectangle.Contains);
 
 		/* START-USER-CTR-CODE */
 		// Write your code here.
 		/* END-USER-CTR-CODE */
 	}
-
-	/** @type {number} */
-	tile_id = 0;
-	/** @type {boolean} */
-	is_it_win = false;
 
 	/* START-USER-CODE */
 
