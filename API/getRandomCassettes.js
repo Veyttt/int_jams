@@ -13,9 +13,9 @@ router.post("/getRandomCassette", (req, res) => {
             if (err) {
                 console.log("couldnt get the player match", err);
             } else {
-                const match_id = results[0].match_id
+                const match_id = results[0].playermatch_match_id
                 console.log("player match = ", match_id);
-                connection.execute('SELECT * FROM playermatch WHERE match_id = ?',
+                connection.execute('SELECT * FROM playermatch WHERE playermatch_match_id = ?',
                     [match_id],
                     function (err, playerResults, fields) {
                         if (err) {

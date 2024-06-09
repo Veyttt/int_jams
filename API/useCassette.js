@@ -7,7 +7,6 @@ router.post("/UseHazardCassette", (req, res) => {
     var player_id = req.body.player_id;
     var player_cassette_id = req.body.player_cassette_id;
     var tile_id = req.body.tile_id;
-    var tile_id2 = req.body.tile_id2;
     var playertarget_id = req.body.playertarget_id;
 
     connection.execute('SELECT * FROM playermatch WHERE player_id = ?',
@@ -59,7 +58,7 @@ router.post("/UseHazardCassette", (req, res) => {
                                                                             } else {
                                                                                 console.log("get the match ",results);
 
-                                                                                if (results[0].tile_id == tile_id || results[1].tile_id == tile_id || results[0].tile_id == tile_id2 || results[1].tile_id == tile_id2 || cassetteResults[0].cassette_id > 3) {
+                                                                                if (results[0].tile_id == tile_id || results[1].tile_id == tile_id || cassetteResults[0].cassette_id > 3) {
 
                                                                                     console.log("theres a player here you cant put the hazard here");
 
@@ -86,7 +85,7 @@ router.post("/UseHazardCassette", (req, res) => {
 
                                                                                         if (cassette == 3){
                                                                                             connection.execute('UPDATE boardmatch SET tile_type_id = ?, hazard_duration = ? WHERE tile_id = ? OR tile_id = ?',
-                                                                                                [cassette + 1, cassette_hazard_duration + 3, tile_id, tile_id2],
+                                                                                                [cassette + 1, cassette_hazard_duration + 3, tile_id],
                                                                                                 function(err, results, fields) {
                                                                                                     if (err){
                                                                                                         res.send(err);
