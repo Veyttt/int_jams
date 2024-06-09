@@ -1,5 +1,12 @@
 .bg{
-    background-color: black;
+
+      
+              margin: 0;
+              padding: 0;
+              height: 100vh;
+              background: linear-gradient(to bottom right, #ff7e5f, #feb47b, #ff7e5f, #feb47b); /* Градиент по углам */
+            
+    /* background-color: black; */
 }
 
 

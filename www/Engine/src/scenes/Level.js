@@ -1638,6 +1638,14 @@ class Level extends Phaser.Scene {
 				this.move(tile.tile_id)
 				console.log(tile.tile_id)
 			})
+
+			tile.on('pointerover', () =>{
+				tile.setTint(0xcd03ff)
+			})
+
+			tile.on('pointerout', () =>{
+				tile.setTint(0xffffff)
+			})
 		});
 
 
@@ -1792,7 +1800,7 @@ console.log('remote_control unpushed');
 /////////////////////////////////////////////////////////////////
 this.leave_match_button.setInteractive();
 this.leave_match_button.on('pointerover', () => {
-	this.leave_match_button.setTint(0xffcc00); 
+	this.leave_match_button.setTint(0xda45ff); 
 
     this.tweens.add({
         targets: this.leave_match_button,
@@ -1829,7 +1837,7 @@ console.log('remote_control unpushed');
 
 this.end_turn_button_pf.setInteractive();
 this.end_turn_button_pf.on('pointerover', () => {
-	this.end_turn_button_pf.setTint(0xffcc00); 
+	this.end_turn_button_pf.setTint(0xda45ff); 
 
     this.tweens.add({
         targets: this.end_turn_button_pf,
@@ -1864,29 +1872,7 @@ console.log('remote_control unpushed');
 ////////////////////////////////////////////////////////////////
 
 
-
-
-
-		// this.endTurn_butt.setInteractive();
-
-
-		// // this.endTurn_butt.on('pointerover', ()=> {
-		// // this.endTurn_butt.setTint(0x00ff00); 
-		// // });
-		// // this.endTurn_butt.on('pointerout', ()=> {
-		// // 	this.endTurn_butt.setTint(0xE0FFFF); 
-		// //  });
-		// // this.endTurn_butt.on('pointerup', ()=> {
-		// // 	console.log('button unpushed');
-		// // });
-		// this.endTurn_butt.on('pointerdown', ()=> {
-		// 	this.EndTurn();
-		// 	// this.endTurn_butt.setTint(0xfff00); 
-		// });
-		// // this.endTurn_butt.on('pointerup', ()=> {
-		// // 	this.endTurn_butt.setTint(0xffff00); 
-		// // });
-
+////////////////////////////////////////////////////////////////
 		this.getPlayersPositions()
 		this.p1_pf.setInteractive();
 		this.p1_pf.on('pointerover', () => {
@@ -1902,7 +1888,7 @@ console.log('remote_control unpushed');
 		this.p1_pf.on('pointerout', () => {
 			this.p1_pf.setTint(0xffffff); 
 			this.tweens.add({
-				targets: this.p1_pf,                               //  END TURN BUTTON
+				targets: this.p1_pf,                               //  PLAYER 1 INTERACTIVE EFFECTS
 				scale: 1,
 				duration: 300,
 				ease: 'Power2'
@@ -1915,7 +1901,7 @@ console.log('remote_control unpushed');
 			else
 				console.log('nonono you cant move this.')
 		})
-
+/////////////////////////////////////////////////////////////////
 
 		this.p2_pf.setInteractive();
 		this.p2_pf.on('pointerover', () => {
@@ -1931,7 +1917,7 @@ console.log('remote_control unpushed');
 		this.p2_pf.on('pointerout', () => {
 			this.p2_pf.setTint(0xffffff); 
 			this.tweens.add({
-				targets: this.p2_pf,                               //  END TURN BUTTON
+				targets: this.p2_pf,                               //  PLAYER 2 INTERACTIVE EFFECTS
 				scale: 1,
 				duration: 300,
 				ease: 'Power2'
@@ -1946,11 +1932,14 @@ console.log('remote_control unpushed');
 		})
 	}
 
+	
+	update(time = 5000, delta = 1000 / 60){
+		console.log("updated");
+	}
+	
 
-// get the player id from the endpoint, store it to the var then when i get the data check 
 
-
-
+	
 
 
 	EndTurn() {
@@ -2028,11 +2017,7 @@ console.log('remote_control unpushed');
 		xhttp.send();
 	}
 
-
-
-
-
-	   getPlayerPosition(playerID){
+	getPlayerPosition(playerID){
 
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = () => {
@@ -2063,8 +2048,7 @@ console.log('remote_control unpushed');
 		xhttp.open("GET", "/tile_id_data", true);
 		xhttp.send();
 
-		}
-
+	}
 
 	move(tile_id) {
 		var xhttp = new XMLHttpRequest();
@@ -2091,10 +2075,3 @@ console.log('remote_control unpushed');
 /* END OF COMPILED CODE */
 
 // You can write more code here
-
-
-
-
-
-
-//////////////////////////////////////////////////////////////////
