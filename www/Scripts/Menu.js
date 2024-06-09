@@ -7,7 +7,7 @@ function creatematch(playerID){
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = () => {
         if (xhttp.readyState == 4) {
-            console.log('Match created succesfully (200) match_id=' + match_id);
+            console.log('Match created succesfully (200)');
         }
     };
 

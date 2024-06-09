@@ -312,6 +312,45 @@ app.post('/createMatch', (request, response) => {
 });
 
 // Endpoint for joining a match
+// app.put('/joinMatch', (request, response) =>  {
+//     var playerID = request.body.playerID;
+//     var match_id = request.body.match_id;
+
+//     // If playerID or matchID is not set, we send a message to the user
+//     if (!playerID || !match_id){
+//         response.send("Data is missing. 💩");
+//         return;
+//     }
+
+//     // We are checking if the match exists and if the player2_id is not set. Also, we are checking if the player1_id is different from the playerID since he can't join his own match.
+//     connection.execute("SELECT gm.match_id, pm.playermatch_match_id FROM gamematch gm JOIN playermatch pm ON gm.match_id = pm.playermatch_match_id WHERE gm.match_id = 2 AND pm.playermatch_match_id NOT IN ( SELECT playermatch_match_id FROM playermatch GROUP BY playermatch_match_id HAVING COUNT(playermatch_match_id) > 1 ('?')" 
+//     [match_id],
+//     function (err, results, fields) {
+//         if (err){
+//             response.send(err);
+//         }else{
+//             // If the results.length is 0 means that we don't have any match with the defined criteria.
+//             if (results.length == 0){
+//                 response.send("No match found with id " + match_id);
+//             }else{
+//                 // If we have a match, we update the player2_id with the playerID
+//                 connection.execute('INSERT INTO playermatch VALUES (?, ?, 85, 1, 0, 0, 0, 0, 0, 0, 0);',
+//                 [playerID, match_id],
+//                 function (err, results, fields) {
+//                     if (err){
+//                         response.send(err);
+//                     }else{
+//                         // ❗Again, we could return a JSON with the playerID and matchID instead of text!
+//                         response.send("You joined match =" + match_id + " 💩🦄");
+//                     }
+//                 });
+//             }
+//         }
+//     });
+// });
+
+
+
 app.put('/joinMatch', (request, response) =>  {
     var playerID = request.body.playerID;
     var match_id = request.body.match_id;
@@ -323,7 +362,7 @@ app.put('/joinMatch', (request, response) =>  {
     }
 
     // We are checking if the match exists and if the player2_id is not set. Also, we are checking if the player1_id is different from the playerID since he can't join his own match.
-    connection.execute("SELECT gm.match_id, pm.playermatch_match_id FROM gamematch gm JOIN playermatch pm ON gm.match_id = pm.playermatch_match_id WHERE gm.match_id = 2 AND pm.playermatch_match_id NOT IN ( SELECT playermatch_match_id FROM playermatch GROUP BY playermatch_match_id HAVING COUNT(playermatch_match_id) > 1 ('?')" 
+    connection.execute("SELECT gm.match_id, pm.playermatch_match_id FROM gamematch gm JOIN playermatch pm ON gm.match_id = pm.playermatch_match_id WHERE gm.match_id = ? AND pm.playermatch_match_id NOT IN ( SELECT playermatch_match_id FROM playermatch GROUP BY playermatch_match_id HAVING COUNT(playermatch_match_id) > 1)",
     [match_id],
     function (err, results, fields) {
         if (err){
