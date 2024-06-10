@@ -5,7 +5,7 @@ const connection = require('../database');
 router.put("/endturn", (req, res) => {
     console.log("endpoint=endturn");
     var match_id = req.body.match_id;
-
+    playerID = req.session.playerID;
     connection.execute('UPDATE playermatch SET has_moved = FALSE, has_used_a_cassette = FALSE, random_cassettes_optained = FALSE WHERE playermatch_match_id = ?', [match_id], (err, results) => {
         if (err) {
             console.error("Error resetting has_moved to 0", err);
@@ -15,6 +15,7 @@ router.put("/endturn", (req, res) => {
             res.status(200).send("Turn ended successfully. has_moved value reset for all players.");
         }
     });
+
 
     connection.execute('UPDATE gamematch SET match_turn = match_turn + 1 WHERE match_id = ?',
         [match_id],

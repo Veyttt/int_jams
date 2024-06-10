@@ -1979,32 +1979,27 @@ this.end_turn_button_pf.setTint(0xffffff);
 
 
 ///////////////////////FUNCTIONS////////////////FUNCTIONS///////////////FUNCTIONS////////////
-	EndTurn() {
-		// if (!playerID)
-		// 	{
-		// 		console.log("Define the playerID!");
-		// 		return;
-		// 	}
-		var xhttp = new XMLHttpRequest();
-		xhttp.onreadystatechange = function() {
-			if (this.readyState == 4) {
-				if (this.status == 200) {
-					console.log("Request successful");
-				} else {
-					console.error("Request failed with status: " + this.responseText);    //EndTurn
-				}
-			}
-		};
+// EndTurn(match_id) {
+// 	var xhttp = new XMLHttpRequest();
+// 	xhttp.onreadystatechange = function() {
+// 		if (this.readyState == 4) {
+// 			if (this.status == 200) {
+// 				console.log("Request successful");
+// 			} else {
+// 				console.error("Request failed with status: " + this.responseText);
+// 			}
+// 		}
+// 	};
 
-		xhttp.open("put", "/endturn/endturn", true);
-		xhttp.setRequestHeader("Content-Type", "application/json");
-		var data = {
-			"match_id": 1,
-			"player_id": 1
-		};
-		var jsonData = JSON.stringify(data);
-		xhttp.send(jsonData); 
-	}
+// 	xhttp.open("PUT", "/endturn/endturn", true);
+// 	xhttp.setRequestHeader("Content-Type", "application/json");
+// 	var data = {
+// 		"match_id": match_id,
+// 	};
+// 	var jsonData = JSON.stringify(data);
+// 	xhttp.send(jsonData); 
+// }
+
 	getPlayersPositions() {
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = () => {
@@ -2135,9 +2130,77 @@ this.end_turn_button_pf.setTint(0xffffff);
 	}
 
 	win(){
-	if(tile.isitwin = true)
-	window.location.replace('/mainPage.html');
+	if(tile.isitwin = true){
+		alert("Congratulations! You have won the game!");
 	}
+	}
+
+	 getMatchId() {
+		const urlParams = new URLSearchParams(window.location.search);
+		const matchId = urlParams.get('match_id');
+		if (matchId) {
+			console.log('Match ID:', matchId);
+		} else {
+			console.error('No match_id found in URL');
+		}
+	};
+
+
+	 getMatchIdAndEndTurn() {
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				var matchId = JSON.parse(this.responseText)[0].id; 
+				this.EndTurn(matchId);
+			} else if (this.readyState == 4) {
+				console.error("Failed to get match id with status: " + this.status);
+			}
+		};
+	
+		xhttp.open("GET", "/matches", true);
+		xhttp.send();
+	}
+	
+	 EndTurn() {
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4) {
+				if (this.status == 200) {
+					console.log("Request successful");
+				} else {
+					console.error("Request failed with status: " + this.responseText);
+				}
+			}
+		};
+	
+		xhttp.open("PUT", "/endturn/endturn", true);
+		xhttp.setRequestHeader("Content-Type", "application/json");
+		var data = {
+			"match_id": 4, //num is doesnt
+			               //matter just send smth here 
+		};
+		var jsonData = JSON.stringify(data);
+		xhttp.send(jsonData); 
+	}
+	
+
+	
+		update(time, delta) {
+			
+			if (time - lastUpdateTime > updateInterval) {
+			
+				lastUpdateTime = time;
+		
+				
+				this.getPlayersPositions()
+			}
+		}
+	
+		
+		
+		
+		
+	
 
 ///////////////////////FUNCTIONS////////////////FUNCTIONS///////////////FUNCTIONS////////////
 

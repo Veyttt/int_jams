@@ -191,9 +191,98 @@ app.get('/getboardmatch', (req,res) => {
 
 })
 
-app.post('/updateWinstate', (req,res) => )
+app.post('/updateWinstate', (req,res) => {
+    console.log("update_w_state started")
+     playerID = req.body.player_id
+if(!playerID){
+    console.log('We are missing data')
+}
+connection.execute("UPDATE player SET player_wins = player_wins + 1, player_matches = player_matches + 1 WHERE player_id = ?",[playerID],
+    function(err,result){
+        if(err){
+            console.error(err)
+    }else{
+        res.send('data updated')
+    }}
+
+)
+
+});
+
+app.post('/updateMstate', (req,res) => {
+    console.log("update_m_state started")
+    playerID = req.session.playerID
+if(!playerID){
+    console.log('We are missing data')
+}
+connection.execute("UPDATE player SET player_matches = player_matches + 1 WHERE player_id = ?",[playerID],
+    function(err,result){
+        if(err){
+            console.error(err)
+    }else{
+        res.send('data updated')
+    }}
+
+)
+
+});
 
 
+// function getPlayerState(){
+//     console.log('get_p_state_started')
+//     connection.execute("SELECT * FROM player WHERE player_id = ?", [player_id]
+//         ,function(err,results){
+//             if (err){
+//                 res.send(err);
+//             } else {
+//                 res.json(result[0].player_wins,player_matches)
+//             }
+//         }
+//     )
+// }
+
+// function updatePlayerState(){
+//     var wins = req.body.wins
+//     var matches = req.body.matches
+
+//     wins = player_wins + 1
+//     matches = player_matches + 1
+//     connection.execute("UPDATE player SET player_wins,player_matches",[wins,matches],
+//         function(err,result){
+//             if(err){
+//                 res.send(err)
+//             }else{
+//                 res.send('Player state updated')
+//             }
+//         }
+//     )
+// }
+
+app.post('/winstateUpdate', async (req, res) => {
+    const state  = req.body.state
+    const playerId = req.body.player_id;
+  
+    if (!playerId) {
+      return res.status(400).send('Player ID not found in cookies');
+    }
+  
+    let updateQuery;
+    if (state === 1) {
+      updateQuery = `UPDATE player SET player_wins = player_wins + 1, player_matches = player_matches + 1 WHERE player_id = ?`;
+    } else if (state === 2) {
+      updateQuery = `UPDATE player SET player_matches = player_matches + 1 WHERE player_id = ?`;
+    } else {
+      return res.status(400).send('Invalid value');
+    }
+  
+    try {
+      await connection.execute(updateQuery, [playerId]);
+      res.send('Player updated successfully');
+    } catch (err) {
+      console.error('Error updating player:', err);
+      res.status(500).send('Database error');
+    }
+  });
 
 
 app.listen(4444, () => {
