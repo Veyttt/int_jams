@@ -42,8 +42,8 @@
             }
         },
         {
-            "name": "is_it_win",
-            "label": "Is_it_win",
+            "name": "isitwin",
+            "label": "Isitwin",
             "tooltip": "",
             "defValue": false,
             "customDefinition": false,

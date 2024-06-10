@@ -732,6 +732,7 @@ class Level extends Phaser.Scene {
 		const rectangle_2 = this.add.rectangle(754, 360, 128, 128);
 		rectangle_2.scaleX = 2.5;
 		rectangle_2.scaleY = 2.5;
+		rectangle_2.visible = false;
 		rectangle_2.isFilled = true;
 		rectangle_2.fillColor = 14352384;
 		rectangle_2.fillAlpha = 0.2;
@@ -739,7 +740,8 @@ class Level extends Phaser.Scene {
 		rectangle_2.lineWidth = 1.5;
 
 		// earth
-		this.add.image(768, 357, "earth");
+		const earth = this.add.image(768, 357, "earth");
+		earth.visible = false;
 
 		// rectangle_1
 		const rectangle_1 = this.add.rectangle(1075, 364, 128, 128);
@@ -788,6 +790,7 @@ class Level extends Phaser.Scene {
 		const rectangle = this.add.rectangle(754, 360, 128, 128);
 		rectangle.scaleX = 2.5;
 		rectangle.scaleY = 2.5;
+		rectangle.visible = false;
 		rectangle.fillColor = 1834983;
 		rectangle.isStroked = true;
 		rectangle.strokeColor = 16716820;
@@ -806,6 +809,26 @@ class Level extends Phaser.Scene {
 		// end_turn_button_pf
 		const end_turn_button_pf = new End_turn_button_pf(this, 1062, 111);
 		this.add.existing(end_turn_button_pf);
+
+		// meteor_hazard_prefab
+		const meteor_hazard_prefab = new Meteor_hazard_prefab(this, 233, 231);
+		this.add.existing(meteor_hazard_prefab);
+
+		// meteor_hazard_prefab_1
+		const meteor_hazard_prefab_1 = new Meteor_hazard_prefab(this, 235, 490);
+		this.add.existing(meteor_hazard_prefab_1);
+
+		// meteor_hazard_prefab_4
+		const meteor_hazard_prefab_4 = new Meteor_hazard_prefab(this, 563, 489);
+		this.add.existing(meteor_hazard_prefab_4);
+
+		// meteor_hazard_prefab_6
+		const meteor_hazard_prefab_6 = new Meteor_hazard_prefab(this, 559, 231);
+		this.add.existing(meteor_hazard_prefab_6);
+
+		// meteor_hazard_prefab_2
+		const meteor_hazard_prefab_2 = new Meteor_hazard_prefab(this, 299, 360);
+		this.add.existing(meteor_hazard_prefab_2);
 
 		// lists
 		const list_tile = [tile_121, tile_122, tile_124, tile_123, tile_126, tile_125, tile_118, tile_117, tile_120, tile_119, tile_116, tile_115, tile_114, tile_113, tile_85, tile_86, tile_88, tile_87, tile_112, tile_111, tile_109, tile_110, tile_108, tile_107, tile_103, tile_104, tile_91, tile_92, tile_90, tile_89, tile_93, tile_94, tile_96, tile_95, tile_106, tile_105, tile_101, tile_102, tile_97, tile_98, tile_100, tile_99, tile_57, tile_58, tile_60, tile_59, tile_84, tile_83, tile_81, tile_82, tile_80, tile_79, tile_75, tile_76, tile_63, tile_64, tile_62, tile_61, tile_65, tile_66, tile_68, tile_67, tile_78, tile_77, tile_73, tile_74, tile_69, tile_70, tile_72, tile_71, tile_29, tile_30, tile_32, tile_31, tile_56, tile_55, tile_53, tile_54, tile_52, tile_51, tile_47, tile_48, tile_35, tile_36, tile_34, tile_33, tile_37, tile_38, tile_40, tile_39, tile_50, tile_49, tile_45, tile_46, tile_41, tile_42, tile_44, tile_43, tile_15, tile_16, tile_14, tile_13, tile_18, tile_17, tile_21, tile_22, tile_11, tile_12, tile_10, tile_9, tile_5, tile_6, tile_8, tile_7, tile_20, tile_19, tile_23, tile_24, tile_26, tile_25, tile_27, tile_28, tile_3, tile_4, tile_2, tile_1];
@@ -902,11 +925,11 @@ class Level extends Phaser.Scene {
 
 		// tile_42 (prefab fields)
 		tile_42.tile_id = 42;
-		tile_42.is_it_win = true;
+		tile_42.isitwin = true;
 
 		// tile_41 (prefab fields)
 		tile_41.tile_id = 41;
-		tile_41.is_it_win = true;
+		tile_41.isitwin = true;
 
 		// tile_46 (prefab fields)
 		tile_46.tile_id = 46;
@@ -922,18 +945,19 @@ class Level extends Phaser.Scene {
 
 		// tile_39 (prefab fields)
 		tile_39.tile_id = 39;
-		tile_39.is_it_win = true;
+		tile_39.isitwin = true;
 
 		// tile_40 (prefab fields)
 		tile_40.tile_id = 40;
-		tile_40.is_it_win = true;
+		tile_40.isitwin = true;
 
 		// tile_38 (prefab fields)
 		tile_38.tile_id = 38;
-		tile_38.is_it_win = true;
+		tile_38.isitwin = true;
 
 		// tile_37 (prefab fields)
 		tile_37.tile_id = 37;
+		tile_37.isitwin = false;
 
 		// tile_33 (prefab fields)
 		tile_33.tile_id = 33;
@@ -958,23 +982,23 @@ class Level extends Phaser.Scene {
 
 		// tile_52 (prefab fields)
 		tile_52.tile_id = 52;
-		tile_52.is_it_win = true;
+		tile_52.isitwin = true;
 
 		// tile_54 (prefab fields)
 		tile_54.tile_id = 54;
-		tile_54.is_it_win = true;
+		tile_54.isitwin = true;
 
 		// tile_53 (prefab fields)
 		tile_53.tile_id = 53;
-		tile_53.is_it_win = true;
+		tile_53.isitwin = true;
 
 		// tile_55 (prefab fields)
 		tile_55.tile_id = 55;
-		tile_55.is_it_win = true;
+		tile_55.isitwin = true;
 
 		// tile_56 (prefab fields)
 		tile_56.tile_id = 56;
-		tile_56.is_it_win = true;
+		tile_56.isitwin = true;
 
 		// tile_31 (prefab fields)
 		tile_31.tile_id = 31;
@@ -996,11 +1020,11 @@ class Level extends Phaser.Scene {
 
 		// tile_70 (prefab fields)
 		tile_70.tile_id = 70;
-		tile_70.is_it_win = true;
+		tile_70.isitwin = true;
 
 		// tile_69 (prefab fields)
 		tile_69.tile_id = 69;
-		tile_69.is_it_win = true;
+		tile_69.isitwin = true;
 
 		// tile_74 (prefab fields)
 		tile_74.tile_id = 74;
@@ -1016,15 +1040,14 @@ class Level extends Phaser.Scene {
 
 		// tile_67 (prefab fields)
 		tile_67.tile_id = 67;
-		tile_67.is_it_win = true;
+		tile_67.isitwin = true;
 
 		// tile_68 (prefab fields)
 		tile_68.tile_id = 68;
-		tile_68.is_it_win = true;
 
 		// tile_66 (prefab fields)
 		tile_66.tile_id = 66;
-		tile_66.is_it_win = true;
+		tile_66.isitwin = true;
 
 		// tile_65 (prefab fields)
 		tile_65.tile_id = 65;
@@ -1052,22 +1075,22 @@ class Level extends Phaser.Scene {
 
 		// tile_80 (prefab fields)
 		tile_80.tile_id = 80;
-		tile_80.is_it_win = true;
+		tile_80.isitwin = true;
 
 		// tile_82 (prefab fields)
 		tile_82.tile_id = 82;
-		tile_82.is_it_win = true;
+		tile_82.isitwin = true;
 
 		// tile_81 (prefab fields)
 		tile_81.tile_id = 81;
-		tile_81.is_it_win = true;
+		tile_81.isitwin = true;
 
 		// tile_83 (prefab fields)
 		tile_83.tile_id = 83;
 
 		// tile_84 (prefab fields)
 		tile_84.tile_id = 84;
-		tile_84.is_it_win = true;
+		tile_84.isitwin = true;
 
 		// tile_59 (prefab fields)
 		tile_59.tile_id = 59;
@@ -1110,22 +1133,23 @@ class Level extends Phaser.Scene {
 
 		// tile_94 (prefab fields)
 		tile_94.tile_id = 94;
-		tile_94.is_it_win = true;
+		tile_94.isitwin = true;
 
 		// tile_95 (prefab fields)
 		tile_95.tile_id = 95;
-		tile_95.is_it_win = true;
+		tile_95.isitwin = true;
 
 		// tile_96 (prefab fields)
 		tile_96.tile_id = 96;
+		tile_96.isitwin = true;
 
 		// tile_97 (prefab fields)
 		tile_97.tile_id = 97;
-		tile_97.is_it_win = true;
+		tile_97.isitwin = true;
 
 		// tile_98 (prefab fields)
 		tile_98.tile_id = 98;
-		tile_98.is_it_win = true;
+		tile_98.isitwin = true;
 
 		// tile_99 (prefab fields)
 		tile_99.tile_id = 99;
@@ -1625,18 +1649,24 @@ class Level extends Phaser.Scene {
 	list_tile;
 
 	/* START-USER-CODE */
+	cassette = null;
 
 	// Write your code here
 
 	create() {
 		this.editorCreate();
-		console.log("🐋 👩‍🦽");
+		console.log('editor created');
+		// this.id4ek(playerID);
 
 
 		this.list_tile.forEach((tile)=> {
 			tile.on('pointerdown', ()=>{
-				this.move(tile.tile_id)
 				console.log(tile.tile_id)
+
+				if (this.cassette == null)
+					this.move(tile.tile_id)
+				else
+					this.placeCassette(tile.tile_id);
 			})
 
 			tile.on('pointerover', () =>{
@@ -1668,8 +1698,16 @@ this.meteor_prefab.on('pointerout', () => {
     });
 });
 this.meteor_prefab.on('pointerdown', () => {
-console.log('meteor pushed')
-this.meteor_prefab.setTint(0x6effe2); 
+	if (this.cassette != null) {
+		console.log("Deselecting meteor cassette");
+		this.cassette = null;
+		this.meteor_prefab.setTint(0xffffff);
+	}
+	else {
+		console.log("Selecting meteor cassette");
+		this.cassette = "meteor";
+		this.meteor_prefab.setTint(0x6effe2); 
+	}
 })
 
 this.meteor_prefab.on('pointerup', ()=> {
@@ -1823,6 +1861,7 @@ this.leave_match_button.on('pointerout', () => {
 
 });
 this.leave_match_button.on('pointerdown', () => {
+	this.lobby();
 console.log('remote_control pushed')
 this.leave_match_button.setTint(0xff7300); 
 })
@@ -1862,12 +1901,13 @@ this.end_turn_button_pf.on('pointerout', () => {
 
 
 this.end_turn_button_pf.on('pointerdown', () => {
-console.log('remote_control pushed')
+	this.EndTurn();
+console.log('endTurn pushed');
 this.end_turn_button_pf.setTint(0xff7300); 
 })
 this.end_turn_button_pf.on('pointerup', ()=> {
 this.end_turn_button_pf.setTint(0xffffff); 
-console.log('remote_control unpushed');
+
 });
 ////////////////////////////////////////////////////////////////
 
@@ -1877,7 +1917,7 @@ console.log('remote_control unpushed');
 		this.p1_pf.setInteractive();
 		this.p1_pf.on('pointerover', () => {
 			this.p1_pf.setTint(0x0fefff); 
-		
+
 			this.tweens.add({
 				targets: this.p1_pf,
 				scale: 1.2,
@@ -1893,7 +1933,7 @@ console.log('remote_control unpushed');
 				duration: 300,
 				ease: 'Power2'
 			});
-		
+
 		});
 		this.p1_pf.on('pointerdown', () => {
 			if (this.p1_pf.playerOwner)
@@ -1906,7 +1946,7 @@ console.log('remote_control unpushed');
 		this.p2_pf.setInteractive();
 		this.p2_pf.on('pointerover', () => {
 			this.p2_pf.setTint(0x0fefff); 
-		
+
 			this.tweens.add({
 				targets: this.p2_pf,
 				scale: 1.2,
@@ -1922,7 +1962,7 @@ console.log('remote_control unpushed');
 				duration: 300,
 				ease: 'Power2'
 			});
-		
+
 		});
 		this.p2_pf.on('pointerdown', () => {
 			if (this.p2_pf.playerOwner)
@@ -1932,23 +1972,22 @@ console.log('remote_control unpushed');
 		})
 	}
 
-	
-	update(time = 5000, delta = 1000 / 60){
-		console.log("updated");
-	}
-	
+
+	// update(time = 5000, delta = 1000 / 60){
+	// 	console.log("updated");
+	// 	this.getPlayersPositions();
+	// }
 
 
-	
 
 
+///////////////////////FUNCTIONS////////////////FUNCTIONS///////////////FUNCTIONS////////////
 	EndTurn() {
-		var playerID = 1
-		if (!playerID)
-			{
-				console.log("Define the playerID!");
-				return;
-			}
+		// if (!playerID)
+		// 	{
+		// 		console.log("Define the playerID!");
+		// 		return;
+		// 	}
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
 			if (this.readyState == 4) {
@@ -1964,12 +2003,11 @@ console.log('remote_control unpushed');
 		xhttp.setRequestHeader("Content-Type", "application/json");
 		var data = {
 			"match_id": 1,
-			"player_id": playerID
+			"player_id": 1
 		};
 		var jsonData = JSON.stringify(data);
 		xhttp.send(jsonData); 
 	}
-
 	getPlayersPositions() {
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = () => {
@@ -2002,7 +2040,7 @@ console.log('remote_control unpushed');
 						this.p1_pf.y = tile.y
 					}
 					if (tile.name == 'tile_' + jsonData.player2Data.tile_id) {
-						console.log('updating ship 1 position to ' +tile.x + '~' + tile.y)
+						console.log('updating ship 2 position to ' +tile.x + '~' + tile.y)
 						this.p2_pf.x = tile.x
 						this.p2_pf.y = tile.y
 					}
@@ -2010,15 +2048,13 @@ console.log('remote_control unpushed');
 
 
 				var tile = document.getElementById(jsonData);
-				console.log(current_tile)
+				// console.log(current_tile)
 			}
 		};
 		xhttp.open("GET", "/getPlayerPositions", true);
 		xhttp.send();
 	}
-
 	getPlayerPosition(playerID){
-
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = () => {
 			if (xhttp.readyState == 4 && xhttp.status == 200) {
@@ -2050,25 +2086,66 @@ console.log('remote_control unpushed');
 
 	}
 
+	placeCassette(tile_id) {
+		// We need the cassette type (cassette_id?)
+		console.log("Placing cassette on tile " + tile_id)
+
+		var player_cassette_id = 2
+
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				console.log(this.responseText)
+				// this.getPlayerPosition(playerID);
+			}																	//Move Function
+		};
+
+		var data = {
+			"player_cassette_id": player_cassette_id,
+			"tile_id": tile_id
+		};
+		var jsonData = JSON.stringify(data);
+		console.log(jsonData);
+
+		xhttp.open("POST", "/useCassette/UseHazardCassette");
+		xhttp.setRequestHeader("Content-Type", "application/json");
+		xhttp.send(jsonData);
+	};
+
 	move(tile_id) {
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
 			console.log(this.responseText)
 			if (this.readyState == 4 && this.status == 200) {
-				getPlayerPosition(playerID);
+				this.getPlayerPosition(playerID);
 				console.log(tile_id)
 			}																	//Move Function
 		};
-
 		var data = {
 			"tile_id": tile_id,
 		};
+
 		var jsonData = JSON.stringify(data);
 		xhttp.open("POST", "/movement/movement");
 		xhttp.setRequestHeader("Content-Type", "application/json");
 		console.log(jsonData);
 		xhttp.send(jsonData);
 	};
+
+
+	lobby(){
+		window.location.replace('/mainPage.html');
+	}
+
+	win(){
+	if(tile.isitwin = true)
+	window.location.replace('/mainPage.html');
+	}
+	
+///////////////////////FUNCTIONS////////////////FUNCTIONS///////////////FUNCTIONS////////////
+
+
+
 	/* END-USER-CODE */
 }
 

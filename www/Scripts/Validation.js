@@ -37,8 +37,10 @@ function try2login() {
         if (xhttp.readyState == 4) {
 
             if (xhttp.status == 200){
-                alert('Welcome back ' + username + '!')
-            console.log('Account ' + username + ' online')
+                alert('Welcome back ' + username + '! redirecting...')
+                console.log('Account ' + username + ' online')
+                window.location.replace('/mainPage.html');
+                
             } else {
                 console.error('Error:', xhttp.statusText);
             }
@@ -60,8 +62,7 @@ function redirect(){
     window.location.replace('/Login.html');
 };
 
-function hui(){
-    
-    sdfgsdg
-    
-}
+function exit(){
+    window.location.href = "https://www.google.com"
+};
+

@@ -6,7 +6,7 @@ router.put("/endturn", (req, res) => {
     console.log("endpoint=endturn");
     var match_id = req.body.match_id;
 
-    connection.execute('UPDATE playermatch SET has_moved = FALSE, has_used_a_cassette = FALSE, random_cassettes_optained = FALSE WHERE match_id = ?', [match_id], (err, results) => {
+    connection.execute('UPDATE playermatch SET has_moved = FALSE, has_used_a_cassette = FALSE, random_cassettes_optained = FALSE WHERE playermatch_match_id = ?', [match_id], (err, results) => {
         if (err) {
             console.error("Error resetting has_moved to 0", err);
             res.status(500).send("Error resetting has_moved");
@@ -57,7 +57,7 @@ router.put("/endturn", (req, res) => {
                 
                 if (results[0].match_state_id == 1) {
 
-                    connection.execute('SELECT * FROM playermatch WHERE match_id = ?',
+                    connection.execute('SELECT * FROM playermatch WHERE playermatch_match_id = ?',
                         [match_id],
                         function (err, playerResults, fields) {
                             if (err) {
@@ -123,7 +123,7 @@ router.put("/endturn", (req, res) => {
                                     )
                                 }
 
-                                connection.execute('UPDATE playermatch SET is_stoped = FALSE, cassettes_broken = FALSE WHERE match_id = ? AND player_id = ?',
+                                connection.execute('UPDATE playermatch SET is_stoped = FALSE, cassettes_broken = FALSE WHERE playermatch_match_id = ? AND player_id = ?',
                                     [match_id, playerResults[0].player_id],
                                     function (err, results, fields) {
                                         if (err) {
@@ -139,7 +139,7 @@ router.put("/endturn", (req, res) => {
 
                 } else if (results[0].match_state_id == 2) {
 
-                    connection.execute('SELECT * FROM playermatch WHERE match_id = ?',
+                    connection.execute('SELECT * FROM playermatch WHERE playermatch_match_id = ?',
                         [match_id],
                         function (err, playerResults, fields) {
                             if (err) {
@@ -205,7 +205,7 @@ router.put("/endturn", (req, res) => {
                                     )
                                 }
 
-                                connection.execute('UPDATE playermatch SET is_stoped = FALSE, cassettes_broken = FALSE WHERE match_id = ? AND player_id = ?',
+                                connection.execute('UPDATE playermatch SET is_stoped = FALSE, cassettes_broken = FALSE WHERE playermatch_match_id = ? AND player_id = ?',
                                     [match_id, playerResults[1].player_id],
                                     function (err, results, fields) {
                                         if (err) {

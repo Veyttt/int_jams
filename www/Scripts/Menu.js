@@ -52,6 +52,10 @@ function func() {
                     const joinButton = document.createElement('button');
                     joinButton.textContent = 'Join Lobby';
                     joinButton.classList.add('button_2');
+
+                    joinButton.onclick = function() {
+                        window.location.replace('/engine');
+                    };
                     
                     
                     
@@ -70,6 +74,10 @@ function func() {
             lobbyList.appendChild(listItem);
         });
 }
+
+function exit(){
+    window.location.href = "https://www.google.com"
+};
 
 
 

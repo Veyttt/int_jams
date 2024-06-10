@@ -31,7 +31,7 @@ router.post('/login', (req, res) => {
 
             if (results.length == 0){
                 res.status(404).send({
-                    "error": "Invalid username or password 💩"
+                    "error": "wrong password or login"
                 });
                 return;
             }

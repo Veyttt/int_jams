@@ -30,12 +30,12 @@ app.use(session({
     cookie: {
                 maxAge: 6000000             
         }
-  }))
+  }));
+
 
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(express.static(path.join(__dirname, 'www')));
 app.use(express.json())
-
 app.use('/match', match); 
 app.use('/player', player); 
 app.use('/endTurn', endTurn);
@@ -45,8 +45,7 @@ app.use('/useCassette', useCassette);
 app.use('/login', login)
 
 app.get("/tile_id_data", (req, res) => {
-    // playerID = req.session.playerID
-    var playerID = 1
+    playerID = req.session.playerID
     connection.execute('SELECT tile_id FROM playermatch WHERE player_id = ?', [playerID], (err,result) => {
         if (err) {
             console.error("Error getting tile_id", err);
@@ -132,45 +131,6 @@ app.post('/createMatch', (request, response) => {
         });
 });
 
-
-// app.put('/joinMatch', (request, response) =>  {
-//     var playerID = request.body.playerID;
-//     var match_id = request.body.match_id;
-//     var playermatch_match_id = request.body.playermatch_match_id
-
-//     if (!playerID || !match_id){
-//          response.send("You are missing data idiot :) "); 
-//         return;
-//     }
-
-    
-//     connection.execute("SELECT gm.match_id, pm.playermatch_match_id FROM gamematch gm JOIN playermatch pm ON gm.match_id = pm.playermatch_match_id WHERE gm.match_id = ? AND pm.playermatch_match_id = ? AND pm.playermatch_match_id NOT IN SELECT playermatch_match_id FROM playermatch GROUP BY playermatch_match_id HAVING COUNT(playermatch_match_id) > 1)  ",
-//     [match_id,playermatch_match_id],
-//     function (err, results, fields) {
-//         if (err){
-//             response.send(err);
-//         }else{
-            
-//             if (results.length == 0){
-//                 response.send("No match found with id " + match_id);
-//             }else{
-        
-//                 connection.execute('INSERT INTO playermatch VALUES (?, ?, 85, 1, 0, 0, 0, 0, 0, 0, 0);',
-//                 [playerID, playermatch_match_id],
-//                 function (err, results, fields) {
-//                     if (err){
-//                         response.send(err);
-//                     }else{
-
-//                         response.send("You joined match =" + match_id + " 💩🦄");
-//                     }
-//                 });
-//             }
-//         }
-//     });
-// });
-
-
 app.get('/matches', (request, response) => {
     connection.execute('SELECT * FROM gamematch ',
     [],
@@ -184,44 +144,32 @@ app.get('/matches', (request, response) => {
     });
 });
 
-
-
-
-
-
-
-
-
-
 app.put('/joinMatch', (request, response) =>  {
-    var player_id = request.body.player_id;
+    var player_id = request.session.player_id;
     var playermatch_match_id = request.body.playermatch_match_id;
 
-    // If playerID or matchID is not set, we send a message to the user
+   
     if (!player_id || !playermatch_match_id){
         response.send("Data is missing. 💩");
         return;
     }
 
-    // We are checking if the match exists and if the player2_id is not set. Also, we are checking if the player1_id is different from the playerID since he can't join his own match.
+    
     connection.execute('SELECT * FROM playermatch WHERE playermatch_match_id = ? AND second_player = 0 ',
     [playermatch_match_id],
     function (err, results, fields) {
         if (err){
             response.send(err);
         }else{
-            // If the results.length is 0 means that we don't have any match with the defined criteria.
             if (results.length == 0){
                 response.send("No match found with id " + playermatch_match_id);
             }else{
-                // If we have a match, we update the player2_id with the playerID
                 connection.execute('INSERT INTO playermatch VALUES (?, ?, 85, 1, 0, 0, 0, 0, 0, 0, 0, 1);',
                 [player_id, playermatch_match_id],
                 function (err, results, fields) {
                     if (err){
                         response.send(err);
                     }else{
-                        // ❗Again, we could return a JSON with the playerID and matchID instead of text!
                         response.send("You joined match " + playermatch_match_id + " 💩🦄");
                     }
                 });
@@ -230,6 +178,18 @@ app.put('/joinMatch', (request, response) =>  {
     });
 });
 
+app.get('/getboardmatch', (req,res) => {
+    connection.execute("SELECT * from boardmatch",[],
+        function(err,results){
+            if (err){
+                res.send(err);
+            } else {
+                res.send(results + 'data got with status 200');
+            }
+        }
+    )
+
+})
 
 
 

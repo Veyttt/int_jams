@@ -2,19 +2,9 @@
     "section1": {
         "files": [
             {
-                "url": "assets/2222.png",
-                "type": "image",
-                "key": "2222"
-            },
-            {
                 "url": "assets/3333.png",
                 "type": "image",
                 "key": "3333"
-            },
-            {
-                "url": "assets/60758.png",
-                "type": "image",
-                "key": "60758"
             },
             {
                 "url": "assets/AEsir_Ship.png",
@@ -22,24 +12,19 @@
                 "key": "AEsir_Ship"
             },
             {
-                "url": "assets/arrow.png",
-                "type": "image",
-                "key": "arrow"
-            },
-            {
                 "url": "assets/BlackHole.png",
                 "type": "image",
                 "key": "BlackHole"
             },
             {
+                "url": "assets/BlackHole_hazard.png",
+                "type": "image",
+                "key": "BlackHole_hazard"
+            },
+            {
                 "url": "Prefab/Cassette_prefabs/BlackHole_prefab.js",
                 "type": "script",
                 "key": "BlackHole_prefab"
-            },
-            {
-                "url": "assets/Button.png",
-                "type": "image",
-                "key": "Button"
             },
             {
                 "url": "assets/CassetteBreak.png",
@@ -72,19 +57,9 @@
                 "key": "End_turn_button_pf"
             },
             {
-                "url": "src/scenes/EndTurn_butt.js",
-                "type": "script",
-                "key": "EndTurn_butt"
-            },
-            {
                 "url": "assets/EndTurnButton.png",
                 "type": "image",
                 "key": "EndTurnButton"
-            },
-            {
-                "url": "Prefab/Map_Prefabs/Leave_match.js",
-                "type": "script",
-                "key": "Leave_match"
             },
             {
                 "url": "assets/LeaveMatchButton.png",
@@ -92,14 +67,19 @@
                 "key": "LeaveMatchButton"
             },
             {
-                "url": "Prefab/Map_Prefabs/meteor.js",
-                "type": "script",
-                "key": "meteor"
-            },
-            {
                 "url": "assets/Meteor.png",
                 "type": "image",
                 "key": "Meteor"
+            },
+            {
+                "url": "assets/meteor_hazard.png",
+                "type": "image",
+                "key": "meteor_hazard"
+            },
+            {
+                "url": "Prefab/hazards_prefabs/Meteor_hazard_prefab.js",
+                "type": "script",
+                "key": "Meteor_hazard_prefab"
             },
             {
                 "url": "Prefab/Cassette_prefabs/Meteor_prefab.js",
@@ -137,11 +117,6 @@
                 "key": "RemoteControl_prefab"
             },
             {
-                "url": "assets/Sprite-0001.png",
-                "type": "image",
-                "key": "Sprite-0001"
-            },
-            {
                 "url": "assets/square.png",
                 "type": "image",
                 "key": "square"
@@ -160,11 +135,6 @@
                 "url": "Prefab/Map_Prefabs/Tile.js",
                 "type": "script",
                 "key": "Tile"
-            },
-            {
-                "url": "assets/updated_meteor.png",
-                "type": "image",
-                "key": "updated_meteor"
             }
         ]
     },

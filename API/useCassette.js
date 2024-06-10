@@ -4,10 +4,26 @@ const connection = require('../database');
 
 router.post("/UseHazardCassette", (req, res) => {
     console.log("endpoint=UseHazardCassette");
-    var player_id = req.body.player_id;
+    var player_id = req.session.playerID;
     var player_cassette_id = req.body.player_cassette_id;
     var tile_id = req.body.tile_id;
     var playertarget_id = req.body.playertarget_id;
+
+    if (!player_id) {
+        res.status(403).send("You are not logged in");
+        return;
+    }
+
+    if (!player_cassette_id || !tile_id) {
+        res.status(400).send("Missing required variables");
+        return;
+    }
+
+    if (!playertarget_id){
+        console.log("Playing a cassette that doesnt target a player!");
+    }
+
+    console.log("Play the cassette with id", player_cassette_id, "on tile", tile_id);
 
     connection.execute('SELECT * FROM playermatch WHERE player_id = ?',
         [player_id],
@@ -15,9 +31,9 @@ router.post("/UseHazardCassette", (req, res) => {
             if (err) {
                 console.log("couldnt get the player match", err);
             } else {
-                const match_id = results[0].match_id
+                const match_id = results[0].playermatch_match_id
                 console.log("player match = ", match_id);
-                connection.execute('SELECT * FROM playermatch WHERE match_id = ?',
+                connection.execute('SELECT * FROM playermatch WHERE playermatch_match_id = ?',
                     [match_id],
                     function (err, playerResults, fields) {
                         if (err) {
@@ -50,7 +66,7 @@ router.post("/UseHazardCassette", (req, res) => {
 
                                                                 if (results[0].tile_type_id == 1) {
 
-                                                                    connection.execute('SELECT * FROM playermatch WHERE match_id = ?',
+                                                                    connection.execute('SELECT * FROM playermatch WHERE playermatch_match_id = ?',
                                                                         [match_id],
                                                                         function (err, results, fields) {
                                                                             if (err) {

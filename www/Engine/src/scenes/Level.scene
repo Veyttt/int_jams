@@ -526,13 +526,14 @@
                 "y",
                 "angle",
                 "tile_id",
-                "is_it_win"
+                "is_it_win",
+                "isitwin"
             ],
             "label": "tile_42",
             "useGameObjectName": true,
             "scope": "CLASS",
             "tile_id": 42,
-            "is_it_win": true,
+            "isitwin": true,
             "x": 885,
             "y": 230,
             "angle": 0
@@ -544,13 +545,14 @@
                 "x",
                 "y",
                 "tile_id",
-                "is_it_win"
+                "is_it_win",
+                "isitwin"
             ],
             "label": "tile_41",
             "useGameObjectName": true,
             "scope": "CLASS",
             "tile_id": 41,
-            "is_it_win": true,
+            "isitwin": true,
             "x": 820,
             "y": 230
         },
@@ -625,13 +627,14 @@
                 "x",
                 "y",
                 "tile_id",
-                "is_it_win"
+                "is_it_win",
+                "isitwin"
             ],
             "label": "tile_39",
             "useGameObjectName": true,
             "scope": "CLASS",
             "tile_id": 39,
-            "is_it_win": true,
+            "isitwin": true,
             "x": 690,
             "y": 230
         },
@@ -643,13 +646,14 @@
                 "y",
                 "angle",
                 "tile_id",
-                "is_it_win"
+                "is_it_win",
+                "isitwin"
             ],
             "label": "tile_40",
             "useGameObjectName": true,
             "scope": "CLASS",
             "tile_id": 40,
-            "is_it_win": true,
+            "isitwin": true,
             "x": 755,
             "y": 230,
             "angle": 0
@@ -662,13 +666,14 @@
                 "y",
                 "angle",
                 "tile_id",
-                "is_it_win"
+                "is_it_win",
+                "isitwin"
             ],
             "label": "tile_38",
             "useGameObjectName": true,
             "scope": "CLASS",
             "tile_id": 38,
-            "is_it_win": true,
+            "isitwin": true,
             "x": 625,
             "y": 230,
             "angle": 0
@@ -679,12 +684,14 @@
             "unlock": [
                 "x",
                 "y",
-                "tile_id"
+                "tile_id",
+                "isitwin"
             ],
             "label": "tile_37",
             "useGameObjectName": true,
             "scope": "CLASS",
             "tile_id": 37,
+            "isitwin": false,
             "x": 560,
             "y": 230
         },
@@ -807,13 +814,14 @@
                 "y",
                 "angle",
                 "tile_id",
-                "is_it_win"
+                "is_it_win",
+                "isitwin"
             ],
             "label": "tile_52",
             "useGameObjectName": true,
             "scope": "CLASS",
             "tile_id": 52,
-            "is_it_win": true,
+            "isitwin": true,
             "x": 625,
             "y": 295,
             "angle": 0
@@ -826,13 +834,14 @@
                 "y",
                 "angle",
                 "tile_id",
-                "is_it_win"
+                "is_it_win",
+                "isitwin"
             ],
             "label": "tile_54",
             "useGameObjectName": true,
             "scope": "CLASS",
             "tile_id": 54,
-            "is_it_win": true,
+            "isitwin": true,
             "x": 755,
             "y": 295,
             "angle": 0
@@ -844,13 +853,14 @@
                 "x",
                 "y",
                 "tile_id",
-                "is_it_win"
+                "is_it_win",
+                "isitwin"
             ],
             "label": "tile_53",
             "useGameObjectName": true,
             "scope": "CLASS",
             "tile_id": 53,
-            "is_it_win": true,
+            "isitwin": true,
             "x": 690,
             "y": 295
         },
@@ -861,13 +871,14 @@
                 "x",
                 "y",
                 "tile_id",
-                "is_it_win"
+                "is_it_win",
+                "isitwin"
             ],
             "label": "tile_55",
             "useGameObjectName": true,
             "scope": "CLASS",
             "tile_id": 55,
-            "is_it_win": true,
+            "isitwin": true,
             "x": 820,
             "y": 295
         },
@@ -879,13 +890,14 @@
                 "y",
                 "angle",
                 "tile_id",
-                "is_it_win"
+                "is_it_win",
+                "isitwin"
             ],
             "label": "tile_56",
             "useGameObjectName": true,
             "scope": "CLASS",
             "tile_id": 56,
-            "is_it_win": true,
+            "isitwin": true,
             "x": 885,
             "y": 295,
             "angle": 0
@@ -994,13 +1006,14 @@
                 "y",
                 "angle",
                 "tile_id",
-                "is_it_win"
+                "is_it_win",
+                "isitwin"
             ],
             "label": "tile_70",
             "useGameObjectName": true,
             "scope": "CLASS",
             "tile_id": 70,
-            "is_it_win": true,
+            "isitwin": true,
             "x": 885,
             "y": 360,
             "angle": 0
@@ -1012,13 +1025,14 @@
                 "x",
                 "y",
                 "tile_id",
-                "is_it_win"
+                "is_it_win",
+                "isitwin"
             ],
             "label": "tile_69",
             "useGameObjectName": true,
             "scope": "CLASS",
             "tile_id": 69,
-            "is_it_win": true,
+            "isitwin": true,
             "x": 820,
             "y": 360
         },
@@ -1093,13 +1107,14 @@
                 "x",
                 "y",
                 "tile_id",
-                "is_it_win"
+                "is_it_win",
+                "isitwin"
             ],
             "label": "tile_67",
             "useGameObjectName": true,
             "scope": "CLASS",
             "tile_id": 67,
-            "is_it_win": true,
+            "isitwin": true,
             "x": 690,
             "y": 360
         },
@@ -1117,7 +1132,6 @@
             "useGameObjectName": true,
             "scope": "CLASS",
             "tile_id": 68,
-            "is_it_win": true,
             "x": 755,
             "y": 360,
             "angle": 0
@@ -1130,13 +1144,14 @@
                 "y",
                 "angle",
                 "tile_id",
-                "is_it_win"
+                "is_it_win",
+                "isitwin"
             ],
             "label": "tile_66",
             "useGameObjectName": true,
             "scope": "CLASS",
             "tile_id": 66,
-            "is_it_win": true,
+            "isitwin": true,
             "x": 625,
             "y": 360,
             "angle": 0
@@ -1275,13 +1290,14 @@
                 "y",
                 "angle",
                 "tile_id",
-                "is_it_win"
+                "is_it_win",
+                "isitwin"
             ],
             "label": "tile_80",
             "useGameObjectName": true,
             "scope": "CLASS",
             "tile_id": 80,
-            "is_it_win": true,
+            "isitwin": true,
             "x": 625,
             "y": 425,
             "angle": 0
@@ -1294,13 +1310,14 @@
                 "y",
                 "angle",
                 "tile_id",
-                "is_it_win"
+                "is_it_win",
+                "isitwin"
             ],
             "label": "tile_82",
             "useGameObjectName": true,
             "scope": "CLASS",
             "tile_id": 82,
-            "is_it_win": true,
+            "isitwin": true,
             "x": 755,
             "y": 425,
             "angle": 0
@@ -1312,13 +1329,14 @@
                 "x",
                 "y",
                 "tile_id",
-                "is_it_win"
+                "is_it_win",
+                "isitwin"
             ],
             "label": "tile_81",
             "useGameObjectName": true,
             "scope": "CLASS",
             "tile_id": 81,
-            "is_it_win": true,
+            "isitwin": true,
             "x": 690,
             "y": 425
         },
@@ -1345,13 +1363,14 @@
                 "y",
                 "angle",
                 "tile_id",
-                "is_it_win"
+                "is_it_win",
+                "isitwin"
             ],
             "label": "tile_84",
             "useGameObjectName": true,
             "scope": "CLASS",
             "tile_id": 84,
-            "is_it_win": true,
+            "isitwin": true,
             "x": 885,
             "y": 425,
             "angle": 0
@@ -1571,13 +1590,14 @@
                 "y",
                 "angle",
                 "tile_id",
-                "is_it_win"
+                "is_it_win",
+                "isitwin"
             ],
             "label": "tile_94",
             "useGameObjectName": true,
             "scope": "CLASS",
             "tile_id": 94,
-            "is_it_win": true,
+            "isitwin": true,
             "x": 625,
             "y": 490,
             "angle": 0
@@ -1589,13 +1609,14 @@
                 "x",
                 "y",
                 "tile_id",
-                "is_it_win"
+                "is_it_win",
+                "isitwin"
             ],
             "label": "tile_95",
             "useGameObjectName": true,
             "scope": "CLASS",
             "tile_id": 95,
-            "is_it_win": true,
+            "isitwin": true,
             "x": 690,
             "y": 490
         },
@@ -1606,12 +1627,14 @@
                 "x",
                 "y",
                 "angle",
-                "tile_id"
+                "tile_id",
+                "isitwin"
             ],
             "label": "tile_96",
             "useGameObjectName": true,
             "scope": "CLASS",
             "tile_id": 96,
+            "isitwin": true,
             "x": 755,
             "y": 490,
             "angle": 0
@@ -1623,13 +1646,14 @@
                 "x",
                 "y",
                 "tile_id",
-                "is_it_win"
+                "is_it_win",
+                "isitwin"
             ],
             "label": "tile_97",
             "useGameObjectName": true,
             "scope": "CLASS",
             "tile_id": 97,
-            "is_it_win": true,
+            "isitwin": true,
             "x": 820,
             "y": 490
         },
@@ -1641,13 +1665,14 @@
                 "y",
                 "angle",
                 "tile_id",
-                "is_it_win"
+                "is_it_win",
+                "isitwin"
             ],
             "label": "tile_98",
             "useGameObjectName": true,
             "scope": "CLASS",
             "tile_id": 98,
-            "is_it_win": true,
+            "isitwin": true,
             "x": 885,
             "y": 490,
             "angle": 0
@@ -2126,6 +2151,7 @@
             "y": 360,
             "scaleX": 2.5,
             "scaleY": 2.5,
+            "visible": false,
             "isFilled": true,
             "fillColor": "#db0000",
             "fillAlpha": 0.2,
@@ -2142,7 +2168,8 @@
                 "key": "earth"
             },
             "x": 768,
-            "y": 357
+            "y": 357,
+            "visible": false
         },
         {
             "type": "Rectangle",
@@ -2255,6 +2282,7 @@
             "y": 360,
             "scaleX": 2.5,
             "scaleY": 2.5,
+            "visible": false,
             "fillColor": "#1bffe7",
             "strokeColor": "#ff1414",
             "strokeAlpha": 0.7,
@@ -2297,6 +2325,61 @@
             "scope": "CLASS",
             "x": 1062,
             "y": 111
+        },
+        {
+            "prefabId": "3bf0d3a1-4812-4449-a524-e5c04acb9375",
+            "id": "2da77246-c427-4ac3-a5c5-5eec89756c86",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "meteor_hazard_prefab",
+            "x": 233,
+            "y": 231
+        },
+        {
+            "prefabId": "3bf0d3a1-4812-4449-a524-e5c04acb9375",
+            "id": "2e202d56-050a-48a7-9d82-8d8b366dc212",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "meteor_hazard_prefab_1",
+            "x": 235,
+            "y": 490
+        },
+        {
+            "prefabId": "3bf0d3a1-4812-4449-a524-e5c04acb9375",
+            "id": "4d1c965c-f06d-42e3-a057-b7dc9f82b0d1",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "meteor_hazard_prefab_4",
+            "x": 563,
+            "y": 489
+        },
+        {
+            "prefabId": "3bf0d3a1-4812-4449-a524-e5c04acb9375",
+            "id": "438068ab-30bf-4210-bc0e-e0818a7d98c8",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "meteor_hazard_prefab_6",
+            "x": 559,
+            "y": 231
+        },
+        {
+            "prefabId": "3bf0d3a1-4812-4449-a524-e5c04acb9375",
+            "id": "3c617b50-dcf2-4302-811d-1aad4f66aac8",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "meteor_hazard_prefab_2",
+            "x": 299,
+            "y": 360
         }
     ],
     "plainObjects": [],
