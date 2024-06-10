@@ -732,7 +732,6 @@ class Level extends Phaser.Scene {
 		const rectangle_2 = this.add.rectangle(754, 360, 128, 128);
 		rectangle_2.scaleX = 2.5;
 		rectangle_2.scaleY = 2.5;
-		rectangle_2.visible = false;
 		rectangle_2.isFilled = true;
 		rectangle_2.fillColor = 14352384;
 		rectangle_2.fillAlpha = 0.2;
@@ -740,8 +739,7 @@ class Level extends Phaser.Scene {
 		rectangle_2.lineWidth = 1.5;
 
 		// earth
-		const earth = this.add.image(768, 357, "earth");
-		earth.visible = false;
+		this.add.image(768, 357, "earth");
 
 		// rectangle_1
 		const rectangle_1 = this.add.rectangle(1075, 364, 128, 128);
@@ -790,7 +788,6 @@ class Level extends Phaser.Scene {
 		const rectangle = this.add.rectangle(754, 360, 128, 128);
 		rectangle.scaleX = 2.5;
 		rectangle.scaleY = 2.5;
-		rectangle.visible = false;
 		rectangle.fillColor = 1834983;
 		rectangle.isStroked = true;
 		rectangle.strokeColor = 16716820;
@@ -2141,7 +2138,7 @@ this.end_turn_button_pf.setTint(0xffffff);
 	if(tile.isitwin = true)
 	window.location.replace('/mainPage.html');
 	}
-	
+
 ///////////////////////FUNCTIONS////////////////FUNCTIONS///////////////FUNCTIONS////////////
 
 

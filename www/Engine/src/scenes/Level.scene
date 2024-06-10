@@ -2151,7 +2151,6 @@
             "y": 360,
             "scaleX": 2.5,
             "scaleY": 2.5,
-            "visible": false,
             "isFilled": true,
             "fillColor": "#db0000",
             "fillAlpha": 0.2,
@@ -2168,8 +2167,7 @@
                 "key": "earth"
             },
             "x": 768,
-            "y": 357,
-            "visible": false
+            "y": 357
         },
         {
             "type": "Rectangle",
@@ -2282,7 +2280,6 @@
             "y": 360,
             "scaleX": 2.5,
             "scaleY": 2.5,
-            "visible": false,
             "fillColor": "#1bffe7",
             "strokeColor": "#ff1414",
             "strokeAlpha": 0.7,

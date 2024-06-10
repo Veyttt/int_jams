@@ -79,6 +79,15 @@ function exit(){
     window.location.href = "https://www.google.com"
 };
 
+function playmusic(){
+    var audio = document.getElementById('background-music');
+    audio.play();
+};
+
+function pauseMusic() {
+    var audio = document.getElementById('background-music');
+    audio.pause();
+}
 
 
 

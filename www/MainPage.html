@@ -9,22 +9,30 @@
 </head>
 <body class="bg">
 
-<div style="position: absolute; right: 1170px; top:670px;">
-    <button style="position: absolute; right: 100px; bottom: 100px;" type="button" class="button" onclick="creatematch()"> Create match<br>
+<div style="position: absolute; right: 50px; top: 50px;">
+    <button type="button" class="button" onclick="creatematch()">Create match</button>
 </div>
         
-
-<div>
-    <button style="position: absolute; right: 600px; bottom: 400px;" type="button" class="button" onclick="exit()"> Create match<br>
+<div style="position: absolute; right: 50px; top: 150px;">
+    <button type="button" class="button" onclick="exit()">Exit</button>
 </div>
 
-    <img style="position: absolute; right: 100px; bottom: 250px;" src="LogoPGN.png" alt="LogoPGN">
+<div style="position: absolute; right: 50px; top: 250px;">
+    <img src="LogoPGN.png" alt="LogoPGN">
+</div>
 
+<div class="lobby-container" style="position: absolute; left: 50px; top: 50px;">
+    <h1 class="button_text">Available Game Lobbies</h1>
+    <button class="button" id="refresh-btn" onclick="func()">Refresh List</button>
+    <ul class="button_text" id="lobby-list"></ul>
+</div>
 
- <div class="lobby-container">
-     <h1 class="button_text" >Available Game Lobbies</h1>
-     <button class="button" id="refresh-btn" onclick="func()">Refresh List</button>   <!-- LOBBY LIST -->
-     <ul class="button_text" id="lobby-list"></ul>
+<div style="position: absolute; left: 50px; bottom: 50px;">
+    <audio style="position: absolute; left: 50px; bottom: 50px;" class="button" id="background-music" controls>
+        <source src="Journey_in_Space.mp3" type="audio/mpeg">
+    </audio>
+    <button class="button" onclick="playmusic()">Play Music</button>
+    <button class="button" onclick="pauseMusic()">Pause Music</button>
 </div>
 
 </body>
