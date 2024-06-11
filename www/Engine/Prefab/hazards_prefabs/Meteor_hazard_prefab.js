@@ -17,6 +17,9 @@ class Meteor_hazard_prefab extends Phaser.GameObjects.Image {
 		/* END-USER-CTR-CODE */
 	}
 
+	/** @type {number} */
+	meteor_id = 0;
+
 	/* START-USER-CODE */
 
 	// Write your code here.

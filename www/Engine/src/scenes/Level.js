@@ -1,4 +1,4 @@
-// You can write more code here
+var time = 0;
 /* START OF COMPILED CODE */
 
 class Level extends Phaser.Scene {
@@ -8,6 +8,7 @@ class Level extends Phaser.Scene {
 
 		/* START-USER-CTR-CODE */
 		// Write your code here.
+
 		/* END-USER-CTR-CODE */
 	}
 
@@ -785,7 +786,7 @@ class Level extends Phaser.Scene {
 		stopSign_prefab.visible = true;
 
 		// rectangle
-		const rectangle = this.add.rectangle(754, 360, 128, 128);
+		const rectangle = this.add.rectangle(756, 360, 128, 128);
 		rectangle.scaleX = 2.5;
 		rectangle.scaleY = 2.5;
 		rectangle.fillColor = 1834983;
@@ -1653,17 +1654,21 @@ class Level extends Phaser.Scene {
 	create() {
 		this.editorCreate();
 		console.log('editor created');
-		// this.id4ek(playerID);
-
+		setInterval(()=>{
+			this.getPlayersPositions();
+		},5000);
 
 		this.list_tile.forEach((tile)=> {
 			tile.on('pointerdown', ()=>{
 				console.log(tile.tile_id)
-
+				// this.spawnCassette(tile)
 				if (this.cassette == null)
 					this.move(tile.tile_id)
 				else
-					this.placeCassette(tile.tile_id);
+					{this.placeCassette(tile.tile_id);
+						this.spawnCassette(tile);
+					}
+
 			})
 
 			tile.on('pointerover', () =>{
@@ -1736,6 +1741,14 @@ this.blackHole_prefab.on('pointerout', () => {
 });
 this.blackHole_prefab.on('pointerdown', () => {
 console.log('black_hole pushed')
+
+
+if (this.cassette != null) {
+	console.log("Deselecting meteor cassette");
+	this.cassette = null;
+	this.meteor_prefab.setTint(0xffffff);
+}
+
 this.blackHole_prefab.setTint(0x6effe2); 
 })
 this.blackHole_prefab.on('pointerup', ()=> {
@@ -1764,7 +1777,11 @@ this.stopSign_prefab.on('pointerout', () => {
     });
 });
 this.stopSign_prefab.on('pointerdown', () => {
-console.log('stop_sign pushed')
+if (this.cassette != null) {
+	console.log("Deselecting meteor cassette");
+	this.cassette = null;
+	this.meteor_prefab.setTint(0xffffff);
+}
 this.stopSign_prefab.setTint(0x6effe2); 
 })
 this.stopSign_prefab.on('pointerup', ()=> {
@@ -1793,7 +1810,11 @@ this.cassetteBreak_prefab.on('pointerout', () => {
     });
 });
 this.cassetteBreak_prefab.on('pointerdown', () => {
-console.log('cassette_break pushed')
+	if (this.cassette != null) {
+		console.log("Deselecting meteor cassette");
+		this.cassette = null;
+		this.meteor_prefab.setTint(0xffffff);
+	}
 this.cassetteBreak_prefab.setTint(0x6effe2); 
 })
 this.cassetteBreak_prefab.on('pointerup', ()=> {
@@ -1822,7 +1843,11 @@ this.remoteControl_prefab.on('pointerout', () => {
     });
 });
 this.remoteControl_prefab.on('pointerdown', () => {
-console.log('remote_control pushed')
+	if (this.cassette != null) {
+		console.log("Deselecting meteor cassette");
+		this.cassette = null;
+		this.meteor_prefab.setTint(0xffffff);
+	}
 this.remoteControl_prefab.setTint(0x6effe2); 
 })
 this.remoteControl_prefab.on('pointerup', ()=> {
@@ -1970,35 +1995,13 @@ this.end_turn_button_pf.setTint(0xffffff);
 	}
 
 
-	// update(time = 5000, delta = 1000 / 60){
-	// 	console.log("updated");
-	// 	this.getPlayersPositions();
-	// }
+	
 
 
 
 
 ///////////////////////FUNCTIONS////////////////FUNCTIONS///////////////FUNCTIONS////////////
-// EndTurn(match_id) {
-// 	var xhttp = new XMLHttpRequest();
-// 	xhttp.onreadystatechange = function() {
-// 		if (this.readyState == 4) {
-// 			if (this.status == 200) {
-// 				console.log("Request successful");
-// 			} else {
-// 				console.error("Request failed with status: " + this.responseText);
-// 			}
-// 		}
-// 	};
 
-// 	xhttp.open("PUT", "/endturn/endturn", true);
-// 	xhttp.setRequestHeader("Content-Type", "application/json");
-// 	var data = {
-// 		"match_id": match_id,
-// 	};
-// 	var jsonData = JSON.stringify(data);
-// 	xhttp.send(jsonData); 
-// }
 
 	getPlayersPositions() {
 		var xhttp = new XMLHttpRequest();
@@ -2006,7 +2009,7 @@ this.end_turn_button_pf.setTint(0xffffff);
 			if (xhttp.readyState == 4 && xhttp.status == 200) {
 				var jsonData = JSON.parse(xhttp.responseText);
 				var tileID = jsonData.tile_id
-
+				this.winState();
 				this.list_tile.sort(function (a, b) {
 					if (a.name < b.name) {
 					  return -1;
@@ -2036,11 +2039,11 @@ this.end_turn_button_pf.setTint(0xffffff);
 						this.p2_pf.x = tile.x
 						this.p2_pf.y = tile.y
 					}
+					
 				})
 
-
 				var tile = document.getElementById(jsonData);
-				// console.log(current_tile)
+				
 			}
 		};
 		xhttp.open("GET", "/getPlayerPositions", true);
@@ -2077,17 +2080,17 @@ this.end_turn_button_pf.setTint(0xffffff);
 		xhttp.send();
 
 	}
-
 	placeCassette(tile_id) {
 		// We need the cassette type (cassette_id?)
 		console.log("Placing cassette on tile " + tile_id)
 
-		var player_cassette_id = 2
+		var player_cassette_id = 1
 
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
 				console.log(this.responseText)
+
 				// this.getPlayerPosition(playerID);
 			}																	//Move Function
 		};
@@ -2103,7 +2106,6 @@ this.end_turn_button_pf.setTint(0xffffff);
 		xhttp.setRequestHeader("Content-Type", "application/json");
 		xhttp.send(jsonData);
 	};
-
 	move(tile_id) {
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
@@ -2123,18 +2125,14 @@ this.end_turn_button_pf.setTint(0xffffff);
 		console.log(jsonData);
 		xhttp.send(jsonData);
 	};
-
-
 	lobby(){
 		window.location.replace('/MainPage.html');
-	}
-
+	};
 	win(){
 	if(tile.isitwin = true){
 		alert("Congratulations! You have won the game!");
 	}
-	}
-
+	};
 	 getMatchId() {
 		const urlParams = new URLSearchParams(window.location.search);
 		const matchId = urlParams.get('match_id');
@@ -2144,8 +2142,6 @@ this.end_turn_button_pf.setTint(0xffffff);
 			console.error('No match_id found in URL');
 		}
 	};
-
-
 	 getMatchIdAndEndTurn() {
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
@@ -2156,11 +2152,10 @@ this.end_turn_button_pf.setTint(0xffffff);
 				console.error("Failed to get match id with status: " + this.status);
 			}
 		};
-	
+
 		xhttp.open("GET", "/matches", true);
 		xhttp.send();
-	}
-	
+	};
 	 EndTurn() {
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
@@ -2172,39 +2167,29 @@ this.end_turn_button_pf.setTint(0xffffff);
 				}
 			}
 		};
-	
+
 		xhttp.open("PUT", "/endturn/endturn", true);
 		xhttp.setRequestHeader("Content-Type", "application/json");
 		var data = {
-			"match_id": 4, //num is doesnt
+			"match_id": 1, //num is doesnt
 			               //matter just send smth here 
 		};
 		var jsonData = JSON.stringify(data);
 		xhttp.send(jsonData); 
+	};
+	spawnCassette(tile){
+		console.log('spawning_meteor...')
+		const meteor_prefab = new Meteor_hazard_prefab(this, tile.x, tile.y);
+		this.add.existing(meteor_prefab);
+		
 	}
-	
-
-	
-		update(time, delta) {
-			
-			if (time - lastUpdateTime > updateInterval) {
-			
-				lastUpdateTime = time;
-		
-				
-				this.getPlayersPositions()
-			}
-		}
-	
-		
-		
-		
-		
-	
-
+	winState(tileID){
+		if (this.p1_pf.x > 624 || this.p2_pf>624 ){
+			alert("Congratulations! You have won the game!");
+			window.location.replace('/MainPage.html');
+		} else {'its not win yet'}
+	}
 ///////////////////////FUNCTIONS////////////////FUNCTIONS///////////////FUNCTIONS////////////
-
-
 
 	/* END-USER-CODE */
 }
