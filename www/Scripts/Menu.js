@@ -54,7 +54,7 @@ function func() {
                     joinButton.classList.add('button_2');
 
                     joinButton.onclick = function() {
-                        window.location.replace('/engine');
+                        window.location.replace('/Engine');
                     };
                     
                     
