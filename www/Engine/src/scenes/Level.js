@@ -2126,7 +2126,7 @@ this.end_turn_button_pf.setTint(0xffffff);
 
 
 	lobby(){
-		window.location.replace('/mainPage.html');
+		window.location.replace('/MainPage.html');
 	}
 
 	win(){
