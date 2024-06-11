@@ -39,7 +39,7 @@ function try2login() {
             if (xhttp.status == 200){
                 alert('Welcome back ' + username + '! redirecting...')
                 console.log('Account ' + username + ' online')
-                 window.location.replace('/mainPage.html');
+                 window.location.replace('/MainPage.html');
                 
             } else {
                 console.error('Error:', xhttp.statusText);
