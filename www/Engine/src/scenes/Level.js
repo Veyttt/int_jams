@@ -1717,8 +1717,9 @@ this.meteor_prefab.setTint(0xffffff);
 console.log('meteor unpushed');
 });
 //////////////////////////////////////////////////////////////////////
+this.cassette1sound = this.sound.add('cassette1.mp3');
+console.log("on skibidi")
 
- this.cassette1sound = this.sound.add('cassette1.mp3');
 
 
 
