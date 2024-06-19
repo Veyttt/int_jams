@@ -110,7 +110,7 @@ function pauseMusic() {
     var audio = document.getElementById('background-music');
     audio.pause();
 }
-console.log("ola")
+
 function checkPlayerMatchState() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = () => {
@@ -125,7 +125,7 @@ function checkPlayerMatchState() {
             if (xhttp.status == 308){
                 setTimeout(() => {
                     console.log("MATCH FOUND. REDIRECTING IN 3 SECONDS...")
-                    document.location.href = "/engine";
+                    document.location.href = "/Engine";
                 },3000)
             }
         }
