@@ -2163,7 +2163,7 @@ this.end_turn_button_pf.setTint(0xffffff);
 					console.log(this.responseText)
 
 				if (this.status != 403)
-					this.spawnCassette(tile);
+					this.spawnCassette(tile.tileID);
 
 				// this.getPlayerPosition(playerID);
 			}																	//Move Function
