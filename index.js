@@ -53,29 +53,152 @@ app.get("/tile_id_data", (req, res) => {
             return;
         } else {
             res.json(result[0])
+        }
+    }); 
+})
+
+app.get("/playerState/getPlayerMatch", (req,res) => {
+    console.log("Asking /playerState/getPlayerMatch");
+    playerID = req.session.playerID;
+    if (!playerID)
+    {
+        res.status(403).send("Not logged in");
+        return;
+    }
+
+    connection.execute('SELECT * from playermatch WHERE player_id = ?',
+        [playerID],
+        (err, results) => {
+            if (err){
+                res.status(500).send(err);
+                return;
+            }
+
+            if (results.length == 0){
+                res.status(200).send("Not in a match");
+                return;
+            }
+
+            req.session.matchID = results[0].playermatch_match_id;
+            res.status(308).send("Player in a match. MatchID: " + results[0].playermatch_match_id)
+        }
+    )
+    
+})
+
+app.get("/playerState/getPlayerMatchState", (req,res) => {
+    console.log("Asking /playerState/getPlayerMatchState");
+    playerID = req.session.playerID;
+    if (!playerID)
+    {
+        res.status(403).send("Not logged in");
+        return;
+    }
+
+    var matchID;
+
+    function getPlayerMatch(){
+        connection.execute('SELECT * from playermatch WHERE player_id = ?',
+            [playerID],
+            (err, results) => {
+                if (err){
+                    res.status(500).send(err);
+                    return;
+                }
+
+                if (results.length == 0){
+                    res.status(200).send("Not in a match");
+                    return;
+                }
+    
+                matchID = results[0].playermatch_match_id;
+                returnMatchState();
+            }
+        )
         
     }
-}); 
+
+    function returnMatchState() {
+        connection.execute('SELECT * from playermatch WHERE playermatch_match_id = ?',
+            [matchID],
+            (err, results) => {
+                if (err){
+                    res.status(500).send(err);
+                    return;
+                }
+    
+                if (results.length == 0){
+                    res.status(403).send("Not in a match");
+                    return;
+                }
+
+                if (results.length == 1){
+                    res.status(200).send("Waiting for player 2");
+                    return;
+                }
+
+                res.status(308).send("Match started");
+            }
+        )
+    }
+
+    getPlayerMatch();
 })
 
 app.get("/getPlayerPositions", (req, res) => {
     playerID = req.session.playerID
-    connection.execute('SELECT player_id, tile_id FROM playermatch', [], (err,result) => {
-        if (err) {
-            console.error("Error getting tile_id", err);
-            res.status(500).send("Error getting tile_id");
-            return;
-        } else {
+    matchID = req.session.matchID
+
+    function getMatchID(){
+        connection.execute('SELECT * from playermatch WHERE player_id = ?',
+            [playerID],
+            (err, results) => {
+                if (err){
+                    res.status(500).send(err);
+                    return;
+                }
+    
+                if (results.length == 0){
+                    res.status(403).send("Not in a match");
+                    return;
+                }
+    
+                req.session.matchID = results[0].playermatch_match_id;
+                matchID = results[0].playermatch_match_id;
+                getPositions();
+            }
+        )
+    }
+
+    function getPositions(){
+        connection.execute('SELECT player_id, tile_id FROM playermatch WHERE playermatch_match_id = ?'
+            , [matchID]
+            , (err,result) => {
+            if (err) {
+                console.error("Error getting tile_id", err);
+                res.status(500).send("Error getting tile_id");
+                return;
+            }
+    
             var isPlayer1Local = playerID == result[0].player_id
-            res.json({
+            res.status(200).send({
                 'player1Data': result[0],
                 'player1Ownership': isPlayer1Local,
                 'player2Data': result[1],
                 'player2Ownership': !isPlayer1Local,
             })
-        
+        }); 
     }
-}); 
+
+    if (!playerID){
+        res.status(403).send("Not logged in - PlayerID missing");
+        return;
+    }
+
+    if (!matchID)
+        getMatchID();
+    else
+        getPositions();
 })
 
 app.get("/", (req, res) => {
@@ -94,37 +217,39 @@ app.get('/get_player_id', (res,req)  => {
         } else {
             res.json(result[0])
         }
-    
-
-})
+    })
 });
 
 app.post('/createMatch', (request, response) => {
-    var player_id = request.body.player_id;
+    var player_id = request.session.playerID;
+
     if (!player_id){
-        response.send("player_id is not set.");
+        response.status(403).send("Not logged in");
         return;
     }
 
+    // TODO: Validar se o jogador já está dentro da partida. Caso contrário nao avança.
+
     
-    connection.execute('INSERT INTO gamematch VALUES (NULL, 0, 1, 1, 0);',
-        [],
+    connection.execute('INSERT INTO gamematch (match_turn, match_state_id, match_map_id, match_name) VALUES (?,?,?,?)',
+        [0, 1, 1, player_id],
         function (err, results, fields) {
             if (err){
-                response.send(err);
+                response.status(500).send(err);
             }else{
                 
+                console.log("gamematch created!");
                 var match_id = results.insertId;
-
                 
-                connection.execute('INSERT INTO playermatch (player_id,playermatch_match_id,tile_id) VALUES (?, ?, 29);',
+                connection.execute('INSERT INTO playermatch (player_id,playermatch_match_id,tile_id) VALUES (?, ?, 29)',
                 [player_id, match_id],
                 function (err, results, fields) {
                     if (err){
-                        response.send("Opsi dopsi. 💩");
+                        response.status(500).send(err);
                     }else{
-                    
-                        response.send("Match created. player_id: " + player_id + " and match_id: " + match_id);
+                        console.log("playermatch created!")
+                        request.session.matchID = match_id;
+                        response.status(200).send("Match created. ID: " + match_id);
                     }
                 });
             }
@@ -145,15 +270,19 @@ app.get('/matches', (request, response) => {
 });
 
 app.put('/joinMatch', (request, response) =>  {
-    var player_id = request.session.player_id;
-    var playermatch_match_id = request.body.playermatch_match_id;
+    var player_id = request.session.playerID;
 
-   
-    if (!player_id || !playermatch_match_id){
-        response.send("Data is missing. 💩");
+    if (!player_id){
+        response.status(403).send("Not logged in - PlayerID missing");
         return;
     }
 
+    var playermatch_match_id = request.body.playermatch_match_id;
+
+    if (!playermatch_match_id){
+        response.status(400).send("Match ID missing");
+        return;
+    }
     
     connection.execute('SELECT * FROM playermatch WHERE playermatch_match_id = ? AND second_player = 0 ',
     [playermatch_match_id],
@@ -194,69 +323,37 @@ app.get('/getboardmatch', (req,res) => {
 app.post('/updateWinstate', (req,res) => {
     console.log("update_w_state started")
      playerID = req.body.player_id
-if(!playerID){
-    console.log('We are missing data')
-}
-connection.execute("UPDATE player SET player_wins = player_wins + 1, player_matches = player_matches + 1 WHERE player_id = ?",[playerID],
-    function(err,result){
-        if(err){
-            console.error(err)
-    }else{
-        res.send('data updated')
-    }}
+    if(!playerID){
+        console.log('We are missing data')
+    }
+    connection.execute("UPDATE player SET player_wins = player_wins + 1, player_matches = player_matches + 1 WHERE player_id = ?",[playerID],
+        function(err,result){
+            if(err){
+                console.error(err)
+        }else{
+            res.send('data updated')
+        }}
 
-)
+    )
 
 });
 
 app.post('/updateMstate', (req,res) => {
     console.log("update_m_state started")
     playerID = req.session.playerID
-if(!playerID){
-    console.log('We are missing data')
-}
-connection.execute("UPDATE player SET player_matches = player_matches + 1 WHERE player_id = ?",[playerID],
-    function(err,result){
-        if(err){
-            console.error(err)
-    }else{
-        res.send('data updated')
-    }}
+    if(!playerID){
+        console.log('We are missing data')
+    }
+    connection.execute("UPDATE player SET player_matches = player_matches + 1 WHERE player_id = ?",[playerID],
+        function(err,result){
+            if(err){
+                console.error(err)
+        }else{
+            res.send('data updated')
+        }}
 
-)
-
+    )
 });
-
-
-// function getPlayerState(){
-//     console.log('get_p_state_started')
-//     connection.execute("SELECT * FROM player WHERE player_id = ?", [player_id]
-//         ,function(err,results){
-//             if (err){
-//                 res.send(err);
-//             } else {
-//                 res.json(result[0].player_wins,player_matches)
-//             }
-//         }
-//     )
-// }
-
-// function updatePlayerState(){
-//     var wins = req.body.wins
-//     var matches = req.body.matches
-
-//     wins = player_wins + 1
-//     matches = player_matches + 1
-//     connection.execute("UPDATE player SET player_wins,player_matches",[wins,matches],
-//         function(err,result){
-//             if(err){
-//                 res.send(err)
-//             }else{
-//                 res.send('Player state updated')
-//             }
-//         }
-//     )
-// }
 
 app.post('/winstateUpdate', async (req, res) => {
     const state  = req.body.state
@@ -284,20 +381,10 @@ app.post('/winstateUpdate', async (req, res) => {
     }
   });
 
-
 app.listen(4444, () => {
     console.log('server-> http://localhost:4444/')
 });
 
-
-
-
-
-
-
-
-
-
-
-//http://localhost:4444/ 
+//easter egg. Hey nelio ;)
+//it was hard semester, but it is what it is. Thank you and Cesar for helping us  11.06.2024  1:35 
 

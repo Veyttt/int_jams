@@ -6,36 +6,47 @@
 <title>Interstellar Jams</title>
 <link rel="stylesheet" href="./styles.css">
 <script src="./Scripts/Validation.js"></script>
+<style>
+    .login-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+    }
+    .login-container p {
+        font-size: 1.2em;
+        margin-bottom: 20px;
+    }
+    .login-container form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .login-container form input {
+        margin: 10px 0;
+    }
+    .login-container button {
+        margin-top: 20px;
+    }
+</style>
 </head>
 <body class="bg">
 
-
-    <div style="position: absolute; top:390px; left:900px;">
-        
-        <form action="/createPlayer" method="post">
-            <p>Please log in below</p>
-            <input class="button" style="position: absolute; left: 50%; top:20%; transform: translate(-50%);" type="text" id="login">Login<br>
-            <input class="button" style="position: absolute; left: 50%; top:185%; transform: translate(-50%);" type="text" id="password">Password<br>
-
-
-
-            <div style="position: absolute; left: 50%; top:390%; transform: translate(-50%);">
-                <button type="button" class="button" onclick="try2login()"> Login
-            </div>
-            
+    <div class="login-container">
+        <p>Please login below...</p>
+        <form>
+            <label for="login">Name:</label>
+            <input class="button" type="text" id="login" name="login">
+            <label for="password">Password:</label>
+            <input class="button" type="text" id="password" name="password">
+            <button type="button" class="button" onclick="try2login()">Login</button>
         </form>
-
-        <!-- <button class="button" type="button" onclick="register()">test</button> -->
     </div>
 
-
-
 <div class="container">
-    <!-- <button class="button2" onclick="EndTurn()">EndTurn</button> <br>
-    <button class="button2" onclick="PlaceBlock('right')">PlaceBlock</button> -->
     <script src="./html_script.js"></script>
 </div>
-
 
 </body>
 </html>

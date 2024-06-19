@@ -72,8 +72,6 @@ router.post('/login', (req, res) => {
 });
 
 
-
-
 function createAccount(request, response, playerName, playerPassword){
     connection.execute('INSERT INTO player (player_name, player_password) VALUES (?,?)',
         [playerName,playerPassword],

@@ -37,9 +37,11 @@ function try2login() {
         if (xhttp.readyState == 4) {
 
             if (xhttp.status == 200){
-                alert('Welcome back ' + username + '! redirecting...')
                 console.log('Account ' + username + ' online')
-                 window.location.replace('/MainPage.html');
+                // Redirect in 3 seconds
+                setTimeout(() => {
+                    window.location.replace('/MainPage.html');
+                }, 3000);
                 
             } else {
                 console.error('Error:', xhttp.statusText);

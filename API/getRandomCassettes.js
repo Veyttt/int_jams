@@ -5,7 +5,7 @@ const connection = require('../database');
 router.post("/getRandomCassette", (req, res) => {
     console.log("endpoint=getRandomCassette");
 
-    var player_id = req.body.player_id;
+    var player_id = req.session.playerID;
 
     connection.execute('SELECT * FROM playermatch WHERE player_id = ?',
         [player_id],
@@ -64,15 +64,15 @@ router.post("/getRandomCassette", (req, res) => {
                                                                             if (err) {
                                                                                 res.send(err);
                                                                             } else {
-                                                                                console.log(results);
-                                                                                randomValue = Math.floor(Math.random() * results.length);
-                                                                                console.log("random: " + randomValue);
-                                                                                var cassette = results[randomValue];
-                                                                                console.log(cassette.cassette_id);
-                                                                                console.log(player_id);
+                                                                                // console.log(results);
+                                                                                // randomValue = Math.floor(Math.random() * results.length);
+                                                                                // console.log("random: " + randomValue);
+                                                                                var cassette = 1
+                                                                                // console.log(cassette.cassette_id);
+                                                                                // console.log(player_id);
                                                                 
                                                                                 connection.execute('UPDATE playermatchcassette SET cassette_id = ? WHERE player_id = ? AND player_cassette_id = ? AND cassette_id = 0',
-                                                                                    [cassette.cassette_id, player_id, 1], 
+                                                                                    [1, player_id, 1], 
                                                                                     function (err, results, fields) {
                                                                                         if (err) {
                                                                                             res.send(err);
@@ -90,7 +90,7 @@ router.post("/getRandomCassette", (req, res) => {
                                                                                 console.log(player_id);
                                                                 
                                                                                 connection.execute('UPDATE playermatchcassette SET cassette_id = ? WHERE player_id = ? AND player_cassette_id = ? AND cassette_id = 0',
-                                                                                    [cassette.cassette_id, player_id, 2],
+                                                                                    [1, player_id, 2],
                                                                                     function (err, results, fields) {
                                                                                         if (err) {
                                                                                             res.send(err);
@@ -127,7 +127,7 @@ router.post("/getRandomCassette", (req, res) => {
                                                                                 console.log(player_id);
                                                                 
                                                                                 connection.execute('UPDATE playermatchcassette SET cassette_id = ? WHERE player_id = ? AND player_cassette_id = ? AND cassette_id = 0',
-                                                                                    [cassette.cassette_id, player_id, cassetteResults[0].player_cassette_id],
+                                                                                    [1, player_id, cassetteResults[0].player_cassette_id],
                                                                                     function (err, results, fields) {
                                                                                         if (err) {
                                                                                             res.send(err);

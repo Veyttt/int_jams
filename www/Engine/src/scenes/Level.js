@@ -1656,17 +1656,18 @@ class Level extends Phaser.Scene {
 		console.log('editor created');
 		setInterval(()=>{
 			this.getPlayersPositions();
-		},5000);
+		},5000); // 2000ms = 2s
+		
 
 		this.list_tile.forEach((tile)=> {
 			tile.on('pointerdown', ()=>{
 				console.log(tile.tile_id)
-				// this.spawnCassette(tile)
 				if (this.cassette == null)
 					this.move(tile.tile_id)
 				else
-					{this.placeCassette(tile.tile_id);
-						this.spawnCassette(tile);
+					{
+						this.placeCassette(tile.tile_id);
+						this.cassette = null;
 					}
 
 			})
@@ -1680,17 +1681,33 @@ class Level extends Phaser.Scene {
 			})
 		});
 
+		this.descriptionText = this.add.text(0, 0, '', {
+			fontSize: '11px',
+			fill: '#ffffff',
+			backgroundColor: '#000000'
+		});
+		this.descriptionText.setVisible(false);
+
 
 /////////////////////////////////////////////////////////////////////
 this.meteor_prefab.setInteractive();
-this.meteor_prefab.on('pointerover', () => {
+this.meteor_prefab.on('pointerover', (pointer) => {
     this.tweens.add({
         targets: this.meteor_prefab,
         scale: 1.2,
         duration: 300,
         ease: 'Power2'
     });
+
+	  this.descriptionText.setText('Meteor: Blocks the path where you place it, it will stay in the field for 3 turns before it vaporizes.');
+	  this.descriptionText.setPosition(pointer.x - 600, pointer.y + 10); // Adjust position as needed
+	  this.descriptionText.setVisible(true);
 });
+
+this.meteor_prefab.on('pointermove', (pointer) => {
+	this.descriptionText.setPosition(pointer.x - 600, pointer.y + 10); // Adjust position as needed
+});
+
 this.meteor_prefab.on('pointerout', () => {
     this.tweens.add({
         targets: this.meteor_prefab,                        // METEOR CASSETTE BUTTON
@@ -1698,7 +1715,10 @@ this.meteor_prefab.on('pointerout', () => {
         duration: 300,
         ease: 'Power2'
     });
+
+	this.descriptionText.setVisible(false);
 });
+
 this.meteor_prefab.on('pointerdown', () => {
 	if (this.cassette != null) {
 		console.log("Deselecting meteor cassette");
@@ -1717,9 +1737,7 @@ this.meteor_prefab.setTint(0xffffff);
 console.log('meteor unpushed');
 });
 //////////////////////////////////////////////////////////////////////
-
 this.cassette1sound = this.sound.add('cassette1sound');
-console.log("on skibidi")
 
 
 
@@ -1862,7 +1880,7 @@ console.log('remote_control unpushed');
 
 /////////////////////////////////////////////////////////////////
 this.leave_match_button.setInteractive();
-this.leave_match_button.on('pointerover', () => {
+this.leave_match_button.on('pointerover', (pointer) => {
 	this.leave_match_button.setTint(0xda45ff); 
 
     this.tweens.add({
@@ -1871,7 +1889,12 @@ this.leave_match_button.on('pointerover', () => {
         duration: 300,
         ease: 'Power2'
     });
+
+	this.descriptionText.setText('Press this to leave the match.');
+	this.descriptionText.setPosition(pointer.x - 200, pointer.y + 10); // Adjust position as needed
+	this.descriptionText.setVisible(true);
 });
+
 this.leave_match_button.on('pointerout', () => {
 
 	this.leave_match_button.setTint(0xffffff); 
@@ -1884,7 +1907,14 @@ this.leave_match_button.on('pointerout', () => {
         ease: 'Power2'
     });
 
+	this.descriptionText.setVisible(false);
+
 });
+
+this.leave_match_button.on('pointermove', (pointer) => {
+	this.descriptionText.setPosition(pointer.x - 200, pointer.y + 10); // Adjust position as needed
+});
+
 this.leave_match_button.on('pointerdown', () => {
 	this.lobby();
 console.log('remote_control pushed')
@@ -1900,7 +1930,7 @@ console.log('remote_control unpushed');
 /////////////////////////////////////////////////////////////////
 
 this.end_turn_button_pf.setInteractive();
-this.end_turn_button_pf.on('pointerover', () => {
+this.end_turn_button_pf.on('pointerover', (pointer) => {
 	this.end_turn_button_pf.setTint(0xda45ff); 
 
     this.tweens.add({
@@ -1909,6 +1939,10 @@ this.end_turn_button_pf.on('pointerover', () => {
         duration: 300,
         ease: 'Power2'
     });
+
+	this.descriptionText.setText('Press this to end your turn, and proceed to the next players turn.');
+	this.descriptionText.setPosition(pointer.x - 200, pointer.y + 10); // Adjust position as needed
+	this.descriptionText.setVisible(true);
 });
 this.end_turn_button_pf.on('pointerout', () => {
 
@@ -1922,6 +1956,12 @@ this.end_turn_button_pf.on('pointerout', () => {
         ease: 'Power2'
     });
 
+	this.descriptionText.setVisible(false);
+
+});
+
+this.leave_match_button.on('pointermove', (pointer) => {
+	this.descriptionText.setPosition(pointer.x - 200, pointer.y + 10); // Adjust position as needed
 });
 
 
@@ -1940,7 +1980,7 @@ this.end_turn_button_pf.setTint(0xffffff);
 ////////////////////////////////////////////////////////////////
 		this.getPlayersPositions()
 		this.p1_pf.setInteractive();
-		this.p1_pf.on('pointerover', () => {
+		this.p1_pf.on('pointerover', (pointer) => {
 			this.p1_pf.setTint(0x0fefff); 
 
 			this.tweens.add({
@@ -1949,6 +1989,10 @@ this.end_turn_button_pf.setTint(0xffffff);
 				duration: 300,
 				ease: 'Power2'
 			});
+
+			this.descriptionText.setText('Player 1: Click it, then click the tile you want to move to, to progress.');
+        	this.descriptionText.setPosition(pointer.x + 10, pointer.y + 10);
+        	this.descriptionText.setVisible(true);
 		});
 		this.p1_pf.on('pointerout', () => {
 			this.p1_pf.setTint(0xffffff); 
@@ -1959,6 +2003,8 @@ this.end_turn_button_pf.setTint(0xffffff);
 				ease: 'Power2'
 			});
 
+			this.descriptionText.setVisible(false);
+
 		});
 		this.p1_pf.on('pointerdown', () => {
 			if (this.p1_pf.playerOwner)
@@ -1966,10 +2012,11 @@ this.end_turn_button_pf.setTint(0xffffff);
 			else
 				console.log('nonono you cant move this.')
 		})
+
 /////////////////////////////////////////////////////////////////
 
 		this.p2_pf.setInteractive();
-		this.p2_pf.on('pointerover', () => {
+		this.p2_pf.on('pointerover', (pointer) => {
 			this.p2_pf.setTint(0x0fefff); 
 
 			this.tweens.add({
@@ -1978,6 +2025,10 @@ this.end_turn_button_pf.setTint(0xffffff);
 				duration: 300,
 				ease: 'Power2'
 			});
+
+			this.descriptionText.setText('Player 2: Click it, then click the tile you want to move to, to progress.');
+        	this.descriptionText.setPosition(pointer.x + 10, pointer.y + 10);
+        	this.descriptionText.setVisible(true);
 		});
 		this.p2_pf.on('pointerout', () => {
 			this.p2_pf.setTint(0xffffff); 
@@ -1988,6 +2039,9 @@ this.end_turn_button_pf.setTint(0xffffff);
 				ease: 'Power2'
 			});
 
+			this.descriptionText.setVisible(false);
+
+
 		});
 		this.p2_pf.on('pointerdown', () => {
 			if (this.p2_pf.playerOwner)
@@ -1995,58 +2049,73 @@ this.end_turn_button_pf.setTint(0xffffff);
 			else
 				console.log('nonono you cant move this.')
 		})
+		
 	}
 
-
-	
-
-
-
-
 ///////////////////////FUNCTIONS////////////////FUNCTIONS///////////////FUNCTIONS////////////
+	checkPlayerIsInMatch(playerID){
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				var jsonData = JSON.parse(xhttp.responseText);
+				var playerID = jsonData.playerID
+				if(playermatch_match_id.result.length[0])
+					window.location.replace('/waitingpage.html');
+					setInterval(()=>{
+						this.XMLHttpRequest(checkPlayerIsInMatch);
+					},5000); // 2000ms = 2s
+					
+			} else if (this.readyState == 4) {
+				console.error("Failed to get match id with status: " + this.status);
+			}
+		};
+
+		xhttp.open("GET", "/get_player_id", true);
+		xhttp.send();
+	} 
 
 
 	getPlayersPositions() {
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = () => {
-			if (xhttp.readyState == 4 && xhttp.status == 200) {
-				var jsonData = JSON.parse(xhttp.responseText);
-				var tileID = jsonData.tile_id
-				this.winState();
-				this.list_tile.sort(function (a, b) {
-					if (a.name < b.name) {
-					  return -1;
-					}
-					if (a.name > b.name) {
-					  return 1;
-					}
-					return 0;
-				  });
+			if (xhttp.readyState == 4) {
+				console.log(xhttp.status + " | " + xhttp.responseText)
+				if (xhttp.status == 200) {
+					var jsonData = JSON.parse(xhttp.responseText);
+					var tileID = jsonData.tile_id
+					this.winState();
+					this.list_tile.sort(function (a, b) {
+						if (a.name < b.name) {
+						return -1;
+						}
+						if (a.name > b.name) {
+						return 1;
+						}
+						return 0;
+					});
 
-				  console.log(jsonData)
-				  console.log(this.p1_pf.playerOwner)
-				this.p1_pf.playerOwner = jsonData.player1Ownership ? 1 : 0
-				console.log(this.p1_pf.playerOwner)
-				console.log(this.p2_pf.playerOwner)
-				this.p2_pf.playerOwner = jsonData.player2Ownership ? 1 : 0
-				console.log(this.p2_pf.playerOwner)
+					this.p1_pf.playerOwner = jsonData.player1Ownership ? 1 : 0
+					this.p2_pf.playerOwner = jsonData.player2Ownership ? 1 : 0
 
-				this.list_tile.forEach((tile) => {
-					if (tile.name == 'tile_' + jsonData.player1Data.tile_id) {
-						console.log('updating ship 1 position to ' +tile.x + '~' + tile.y)
-						this.p1_pf.x = tile.x
-						this.p1_pf.y = tile.y
-					}
-					if (tile.name == 'tile_' + jsonData.player2Data.tile_id) {
-						console.log('updating ship 2 position to ' +tile.x + '~' + tile.y)
-						this.p2_pf.x = tile.x
-						this.p2_pf.y = tile.y
-					}
-					
-				})
+					this.list_tile.forEach((tile) => {
+						if (tile.name == 'tile_' + jsonData.player1Data.tile_id) {
+							console.log('updating ship 1 position to ' +tile.x + '~' + tile.y)
+							this.p1_pf.x = tile.x
+							this.p1_pf.y = tile.y
+						}
+						if (tile.name == 'tile_' + jsonData.player2Data.tile_id) {
+							console.log('updating ship 2 position to ' +tile.x + '~' + tile.y)
+							this.p2_pf.x = tile.x
+							this.p2_pf.y = tile.y
+						}
 
-				var tile = document.getElementById(jsonData);
-				
+					})
+
+					var tile = document.getElementById(jsonData);
+				}else if (xhttp.status == 403) {
+					// Redirect to login.html
+					document.location.href = "../login.html";
+				}
 			}
 		};
 		xhttp.open("GET", "/getPlayerPositions", true);
@@ -2070,7 +2139,6 @@ this.end_turn_button_pf.setTint(0xffffff);
 				  });
 
 				var tile = this.list_tile[tileID - 1]
-				  // if this is NOT the local player, then disable setInteractive as false
 
 				console.log(tile,playerID)
 				this.p1_pf.x = tile.x
@@ -2084,15 +2152,18 @@ this.end_turn_button_pf.setTint(0xffffff);
 
 	}
 	placeCassette(tile_id) {
-		// We need the cassette type (cassette_id?)
 		console.log("Placing cassette on tile " + tile_id)
 
 		var player_cassette_id = 1
 
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
-			if (this.readyState == 4 && this.status == 200) {
-				console.log(this.responseText)
+			if (this.readyState == 4) {
+				if (this.status == 200)
+					console.log(this.responseText)
+
+				if (this.status != 403)
+					this.spawnCassette(tile);
 
 				// this.getPlayerPosition(playerID);
 			}																	//Move Function
@@ -2111,11 +2182,16 @@ this.end_turn_button_pf.setTint(0xffffff);
 	};
 	move(tile_id) {
 		var xhttp = new XMLHttpRequest();
-		xhttp.onreadystatechange = function() {
-			console.log(this.responseText)
-			if (this.readyState == 4 && this.status == 200) {
-				this.getPlayerPosition(playerID);
-				console.log(tile_id)
+		xhttp.onreadystatechange = () => {
+			if (xhttp.readyState != 4)
+				return;
+
+			console.log("Got response from server /movement/movement")
+			console.log(xhttp.status + " | " + xhttp.responseText)
+			if(xhttp.status == 200) {
+				console.log("okey donkey");
+				// this.getPlayerPosition(playerID);
+				// this.getPlayersPositions();
 			}																	//Move Function
 		};
 		var data = {
@@ -2170,23 +2246,24 @@ this.end_turn_button_pf.setTint(0xffffff);
 				}
 			}
 		};
-
+		
 		xhttp.open("PUT", "/endturn/endturn", true);
 		xhttp.setRequestHeader("Content-Type", "application/json");
 		var data = {
-			"match_id": 1, //num is doesnt
-			               //matter just send smth here 
+			"match_id": 1, //dont forget to put here dynamic match id
+
 		};
 		var jsonData = JSON.stringify(data);
 		xhttp.send(jsonData); 
 	};
 	spawnCassette(tile){
-		console.log('spawning_meteor...')
+		console.log('spawning_hazard')
 		const meteor_prefab = new Meteor_hazard_prefab(this, tile.x, tile.y);
 		this.add.existing(meteor_prefab);
 		this.cassette1sound.play({
-    		volume: 0.5
+    		volume: 0.3
 		});
+		
 		
 	}
 	winState(tileID){

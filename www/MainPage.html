@@ -35,5 +35,21 @@
     <button class="button" onclick="pauseMusic()">Pause Music</button>
 </div>
 
+<div style="position: absolute; left: 50px; top: 150px;">
+    <!-- New button for Rules -->
+    <button class="button" onclick="goToRulesPage()">Rules</button>
+</div>
+
+<script>
+    function goToRulesPage() {
+        window.location.href = 'rules.html'; // Replace with your rules page URL
+    }
+
+    // Check if player is in a match after page load
+    window.onload = function() {
+        console.log("Checking if player already in a match");
+        checkPlayerIsInMatch();
+    }
+</script>
 </body>
 </html>
