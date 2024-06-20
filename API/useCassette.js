@@ -3,66 +3,82 @@ const router = express.Router();
 const connection = require('../database');
 
 router.post("/UseHazardCassette", (req, res) => {
-    console.log("endpoint=UseHazardCassette");
-    var player_id = req.session.playerID;
-    var player_cassette_id = req.body.player_cassette_id;
-    var tile_id = req.body.tile_id;
-    var playertarget_id = req.body.playertarget_id;
+    console.log("Asking /UseHazardCassete");
 
+    var player_id = req.session.playerID;
     if (!player_id) {
         res.status(403).send("You are not logged in");
         return;
     }
 
-    if (!player_cassette_id || !tile_id) {
+    var player_cassette_id = req.body.player_cassette_id;
+    if (!player_cassette_id) {
         res.status(400).send("Missing required variables");
         return;
     }
 
-    if (!playertarget_id){
-        console.log("Playing a cassette that doesnt target a player!");
+    var tile_id = req.body.tile_id;
+    if (!tile_id) {
+        res.status(400).send("Missing required variables");
+        return;
     }
 
-    console.log("Play the cassette with id", player_cassette_id, "on tile", tile_id);
+    var playertarget_id
+    //  = req.body.playertarget_id;
+    // if (!playertarget_id){
+    //     res.status(400).send("Missing target player");
+    //     return;
+    // }
+
+    console.log("Play the cassette with id " + player_cassette_id + " on tile " + tile_id);
 
     connection.execute('SELECT * FROM playermatch WHERE player_id = ?',
         [player_id],
         function (err, results, fields) {
             if (err) {
-                console.log("couldnt get the player match", err);
+                res.status(500).send(err);
+                return;
             } else {
                 const match_id = results[0].playermatch_match_id
-                console.log("player match = ", match_id);
                 connection.execute('SELECT * FROM playermatch WHERE playermatch_match_id = ?',
                     [match_id],
                     function (err, playerResults, fields) {
                         if (err) {
-                            console.log("couldnt get the players from the match requested", err);
+                            res.status(500).send(err);
+                            return;
                         } else {
-                            console.log(playerResults)
                             connection.execute('SELECT match_state_id FROM gamematch',
                             function (err, results, fields) {
                                 if (err) {
-                                    console.log("couldnt get match_state_id", err);
+                                    res.status(500).send(err);
+                                    return;
                                 } else {
-                                    console.log("Player turn ",results[0].match_state_id);
-                                    console.log("Player_id that belongs to that turn =",playerResults[results[0].match_state_id - 1].player_id);
                                     if (playerResults[results[0].match_state_id - 1].player_id == player_id ) {
 
                                         connection.execute('SELECT * FROM playermatchcassette WHERE player_id = ? AND player_cassette_id = ?',
                                             [player_id, player_cassette_id],
                                             function (err, cassetteResults, fields) {
                                                 if (err) {
-                                                    res.send(err);
+                                                    res.status(500).send(err);
+                                                    return;
                                                 } else {
+                                                    if (cassetteResults.length == 0) {
+                                                        res.status(400).send("Player does not have that cassette");
+                                                        return;
+                                                    }
 
                                                     connection.execute('SELECT * FROM boardmatch WHERE tile_id = ?',
                                                         [tile_id],
                                                         function (err, results, fields) {
                                                             if (err) {
-                                                                res.send(err);
+                                                                res.status(500).send(err);
+                                                                return;
                                                             } else {
-                                                                console.log("tile_type_id for the tile the hazards wants to go", results[0].tile_type_id);
+
+                                                                if (results.length == 0) {
+                                                                    res.status(400).send("Tile does not exist");
+                                                                    return;
+                                                                }
 
                                                                 if (results[0].tile_type_id == 1) {
 
@@ -70,26 +86,29 @@ router.post("/UseHazardCassette", (req, res) => {
                                                                         [match_id],
                                                                         function (err, results, fields) {
                                                                             if (err) {
-                                                                                res.send(err);
+                                                                                res.status(500).send(err);
+                                                                                return;
                                                                             } else {
-                                                                                console.log("get the match ",results);
+
+                                                                                if (results.length < 1) {
+                                                                                    res.status(400).send("Can't get both players from the query.");
+                                                                                    return;
+                                                                                }
 
                                                                                 if (results[0].tile_id == tile_id || results[1].tile_id == tile_id || cassetteResults[0].cassette_id > 3) {
 
-                                                                                    console.log("theres a player here you cant put the hazard here");
+                                                                                    res.status(400).send("theres a player here you cant put the hazard here");
+                                                                                    return;
 
                                                                                 } else {
-                                                                                    console.log("theres no player in this tile, the hazard can be placed");
 
                                                                                     connection.execute("SELECT * FROM playermatch WHERE player_id = ?", [player_id], (err, results) => {
                                                                                         if (err) {
-                                                                                            console.error("Error checking if player has moved", err);
-                                                                                            res.status(500).send("Error checking if player has moved");
+                                                                                            res.status(500).send(err);
                                                                                             return;
                                                                                         }
 
                                                                                         if (results[0].cassettes_broken || results[0].random_cassettes_optained) {
-                                                                                            console.log("Player cant play a cassette right now");
                                                                                             res.status(403).send("Player cant play a cassette right now");
                                                                                             return;
                                                                                         }
@@ -97,18 +116,18 @@ router.post("/UseHazardCassette", (req, res) => {
                                                                                         const cassette = cassetteResults[0].cassette_id;
                                                                                         const cassette_hazard_duration = 3
 
-                                                                                        console.log("player will play cassette number:", cassette);
-
                                                                                         if (cassette == 3){
                                                                                             connection.execute('UPDATE boardmatch SET tile_type_id = ?, hazard_duration = ? WHERE tile_id = ? OR tile_id = ?',
                                                                                                 [cassette + 1, cassette_hazard_duration + 3, tile_id],
                                                                                                 function(err, results, fields) {
                                                                                                     if (err){
-                                                                                                        res.send(err);
+                                                                                                        res.status(500).send(err);
+                                                                                                        return;
                                                                                                     } else {
-                                                                                                        console.log("player played cassette number:", cassette);
+                                                                                                        res.status(200).send("player played cassette number:" + cassette);
+                                                                                                        return;
                                                                                                     }
-
+                                                                                                    
                                                                                                 }
 
                                                                                             );
@@ -119,9 +138,11 @@ router.post("/UseHazardCassette", (req, res) => {
                                                                                                 [cassette + 1, cassette_hazard_duration, tile_id],
                                                                                                 function(err, results, fields) {
                                                                                                     if (err){
-                                                                                                        res.send(err);
+                                                                                                        res.status(500).send(err);
+                                                                                                        return;
                                                                                                     } else {
-                                                                                                        console.log("player played cassette number:", cassette);
+                                                                                                        res.status(200).send("player played cassette number:" + cassette);
+                                                                                                        return;
                                                                                                     }
 
                                                                                                 }
@@ -134,9 +155,11 @@ router.post("/UseHazardCassette", (req, res) => {
                                                                                             [player_id],
                                                                                             function(err, results, fields) {
                                                                                                 if (err){
-                                                                                                    res.send(err);
+                                                                                                    res.status(500).send(err);
+                                                                                                    return;
                                                                                                 } else {
-                                                                                                    console.log("player played a cassette");
+                                                                                                    res.status(200).send("player played cassette number:" + cassette);
+                                                                                                    return;
                                                                                                 }
 
                                                                                             }
@@ -147,7 +170,8 @@ router.post("/UseHazardCassette", (req, res) => {
                                                                                             [player_id, player_cassette_id],
                                                                                             function(err, results, fields) {
                                                                                                 if (err){
-                                                                                                    res.send(err);
+                                                                                                    res.status(500).send(err);
+                                                                                                    return;
                                                                                                 } else {
                                                                                                     console.log("the cassette the player used got deleted");
                                                                                                 };
@@ -162,17 +186,13 @@ router.post("/UseHazardCassette", (req, res) => {
 
                                                                                 if (playertarget_id == playerResults[0].player_id || playertarget_id == playerResults[1].player_id) {
 
-                                                                                    console.log("player selected is correct");
-
                                                                                     connection.execute("SELECT * FROM playermatch WHERE player_id = ?", [player_id], (err, results) => {
                                                                                         if (err) {
-                                                                                            console.error("Error checking if player has moved", err);
-                                                                                            res.status(500).send("Error checking if player has moved");
+                                                                                            res.status(500).send(err);
                                                                                             return;
                                                                                         }
 
                                                                                         if (results[0].cassettes_broken || results[0].random_cassettes_optained) {
-                                                                                            console.log("Player cant play a cassette right now");
                                                                                             res.status(403).send("Player cant play a cassette right now");
                                                                                             return;
                                                                                         }
@@ -185,7 +205,8 @@ router.post("/UseHazardCassette", (req, res) => {
                                                                                                 [playertarget_id],
                                                                                                 function(err, results, fields) {
                                                                                                     if (err){
-                                                                                                        res.send(err);
+                                                                                                        res.status(500).send(err);
+                                                                                                        return;
                                                                                                     } else {
                                                                                                         console.log("player played cassette number:", cassette);
                                                                                                     }
@@ -200,8 +221,10 @@ router.post("/UseHazardCassette", (req, res) => {
                                                                                                 [playertarget_id],
                                                                                                 function(err, results, fields) {
                                                                                                     if (err){
-                                                                                                        res.send(err);
+                                                                                                        res.status(500).send(err);
+                                                                                                        return;
                                                                                                     } else {
+
                                                                                                         console.log("player played cassette number:", cassette);
                                                                                                     }
     
@@ -215,7 +238,8 @@ router.post("/UseHazardCassette", (req, res) => {
                                                                                                 [tile_id],
                                                                                                 function (err, results, fields) {
                                                                                                     if (err) {
-                                                                                                        console.log("Error checking if the tile where the player wants to go is taken by a meteor", err);
+                                                                                                        res.status(500).send(err);
+                                                                                                        return;
                                                                                                     } else {
                                                                                                         console.log(results[0].tile_type_id);
                                                                                                         if (results[0].tile_type_id != 2) {
@@ -226,7 +250,8 @@ router.post("/UseHazardCassette", (req, res) => {
                                                                                                                     [player_id],
                                                                                                                     function (err, results, fields) {
                                                                                                                         if (err) {
-                                                                                                                            console.log("Error updating player_hazard_duration", err);
+                                                                                                                            res.status(500).send(err);
+                                                                                                                            return;
                                                                                                                         } else {
                                                                                                                             console.log("Updated player_hazard_duration in blackhole tile");
                                                                                                                         }
@@ -236,8 +261,7 @@ router.post("/UseHazardCassette", (req, res) => {
 
                                                                                                             connection.execute('SELECT tile_id FROM playermatch WHERE player_id = ?', [player_id], (err, playermatchResults, fields) =>{
                                                                                                                 if (err) {
-                                                                                                                    console.error("Error getting tile_id", err);
-                                                                                                                    res.status(500).send("Error getting tile_id");
+                                                                                                                    res.status(500).send(err);
                                                                                                                     return;
                                                                                                                 }
                                                                                                         
@@ -251,8 +275,7 @@ router.post("/UseHazardCassette", (req, res) => {
                                                                                                                 ) {
                                                                                                                     connection.execute("SELECT * FROM playermatch WHERE player_id = ?", [player_id], (err, results) => {
                                                                                                                         if (err) {
-                                                                                                                            console.error("Error checking if player has moved", err);
-                                                                                                                            res.status(500).send("Error checking if player has moved");
+                                                                                                                            res.status(500).send(err);
                                                                                                                             return;
                                                                                                                         }
                         
@@ -266,7 +289,8 @@ router.post("/UseHazardCassette", (req, res) => {
                                                                                                                             [tile_id, playertarget_id],
                                                                                                                             function (err, results, fields) {
                                                                                                                                 if (err) {
-                                                                                                                                    console.log("Error updating player's tile_id", err);
+                                                                                                                                    res.status(500).send(err);
+                                                                                                                                    return;
                                                                                                                                 } else {
                                                                                                                                     console.log("Player moved to", tile_id);
                                                                                                                                 };
@@ -291,7 +315,8 @@ router.post("/UseHazardCassette", (req, res) => {
                                                                                             [player_id],
                                                                                             function(err, results, fields) {
                                                                                                 if (err){
-                                                                                                    res.send(err);
+                                                                                                    res.status(500).send(err);
+                                                                                                    return;
                                                                                                 } else {
                                                                                                     console.log("player played a cassette");
                                                                                                 }
@@ -304,7 +329,8 @@ router.post("/UseHazardCassette", (req, res) => {
                                                                                             [player_id, player_cassette_id],
                                                                                             function(err, results, fields) {
                                                                                                 if (err){
-                                                                                                    res.send(err);
+                                                                                                    res.status(500).send(err);
+                                                                                                    return;
                                                                                                 } else {
                                                                                                     console.log("the cassette the player used got deleted");
                                                                                                 };
@@ -317,7 +343,8 @@ router.post("/UseHazardCassette", (req, res) => {
 
                                                                                 } else {
 
-                                                                                    console.log("player selected is not correct");
+                                                                                    res.status(400).send("player selected is not correct");
+                                                                                    return;
                                                                                     
                                                                                 }
 
@@ -327,7 +354,8 @@ router.post("/UseHazardCassette", (req, res) => {
 
                                                                 } else {
 
-                                                                    console.log("this tile already has a hazard choose another tile");
+                                                                    res.status(400).send("this tile already has a hazard choose another tile");
+                                                                    return;
 
                                                                 }
 
@@ -341,7 +369,8 @@ router.post("/UseHazardCassette", (req, res) => {
                                         );
 
                                     } else {
-                                        console.log("its not that player turn");
+                                        res.status(403).send("its not that player turn");
+                                        return;
                                     }
                                 } 
                             }
@@ -354,5 +383,160 @@ router.post("/UseHazardCassette", (req, res) => {
         }
     )
 });
+
+
+router.post("/UseMeteorCassette", (req, res) => {
+    console.log("Asking /UseMeteorCassette");
+
+    var player_id = req.session.playerID;
+    if (!player_id) {
+        res.status(403).send("You are not logged in");
+        return;
+    }
+
+    var player_cassette_id = req.body.player_cassette_id;
+    if (!player_cassette_id) {
+        res.status(400).send("Missing required variables");
+        return;
+    }
+
+    var tile_id = req.body.tile_id;
+    if (!tile_id) {
+        res.status(400).send("Missing required variables");
+        return;
+    }
+
+    function ChangeTileID(){
+        var query = "INSERT INTO boardmatch (match_id, tile_id, tile_type_id, hazard_duration) VALUES (" + req.session.matchID + ", " + tile_id + ", 2, 3)";
+        connection.execute('INSERT INTO boardmatch (match_id, tile_id, tile_type_id, hazard_duration) VALUES (?,?,?,?)',
+            [req.session.matchID, tile_id, 2, 3],
+            function(err, results, fields) {
+                if (err){
+                    res.status(500).send(err);
+                    return;
+                } else {
+                    res.status(200).send({
+                        query: query,
+                        message: "Meteor cassette used"
+                    });
+                    return;
+                }
+            }
+        );
+    }
+
+    ChangeTileID();
+});
+
+router.get('/getTiles', (req, res) => {
+    var playerID = req.session.playerID;
+
+    if (!playerID) {
+        res.status(403).send("You are not logged in");
+        return;
+    }
+
+    var matchID = req.session.matchID;
+
+    function getMatchIDFirst(){
+        connection.execute('SELECT * from playermatch where player_id = ?',
+            [playerID],
+            function(err, results, fields) {
+                if (err){
+                    res.status(500).send(err);
+                    return;
+                }   
+
+                req.session.matchID = results[0].playermatch_match_id;
+                matchID = results[0].playermatch_match_id;
+                getHazards();
+            }
+        );
+    }
+
+    function getHazards(){
+        var query = 'SELECT * from boardmatch where tile_type_id > 1 and match_id = ' + matchID;
+        connection.execute('SELECT * from boardmatch where tile_type_id > 1 and match_id = ?',
+            [matchID],
+            function(err, results, fields) {
+                if (err)
+                    res.status(500).send(err);
+                else
+                    res.send({
+                        query: query,
+                        tiles: results});
+            }
+        );
+    }
+
+    if (matchID)
+        getHazards();
+    else
+        getMatchIDFirst();
+});
+
+router.get("/playerTurn", (req, res) => {
+    var playerID = req.session.playerID;
+    var matchID = req.session.matchID;
+
+    if (!matchID || !playerID) {
+        res.send({});
+        return;
+    }
+
+    var player1ID 
+
+    function getPlayer1ID(){
+        connection.execute('SELECT * FROM playermatch WHERE playermatch_match_id = ?',
+            [matchID],
+            function(err, results, fields) {
+                if (err)
+                    res.status(500).send(err);
+                else{
+                    player1ID = results[0].player_id;
+                    getPlayerTurn();
+                }
+            }
+        );
+    }
+
+    function getPlayerTurn(){
+        connection.execute('SELECT * FROM gamematch WHERE match_id = ?',
+            [matchID],
+            function(err, results, fields) {
+                if (err)
+                    res.status(500).send(err);
+                else{
+                    if (results[0].match_state_id == 1){
+                        if (playerID == player1ID)
+                            res.send({turn: true});
+                        else
+                            res.send({turn: false});
+                    }
+                    else {
+                        if (playerID == player1ID)
+                            res.send({turn: false});
+                        else
+                            res.send({turn: true});
+                    }
+                }
+            }
+        );
+    }
+
+    getPlayer1ID();
+})
+
+
+// Cesar testing stuff hehehehe :)
+// connection.execute('select * from boardmatch',
+//     [],
+//     function(err, results, fields) {
+//         if (err)
+//             console.log(err);
+//         else
+//             console.log(results);
+//     }
+// );
 
 module.exports = router;

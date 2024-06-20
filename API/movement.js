@@ -32,7 +32,7 @@ router.post("/movement", (req, res) => {
                                         res.status(500).send(err);
                                         return;
                                     } else {
-                                        if (playerResults[results[0].match_state_id - 1].player_id == player_id ) {
+                                        // if (playerResults[results[0].match_state_id - 1].player_id == player_id ) {
                                             connection.execute('SELECT has_moved FROM playermatch WHERE player_id = ?',
                                                 [player_id],
                                                 function (err, results, fields) {
@@ -137,10 +137,10 @@ router.post("/movement", (req, res) => {
                                                 }
                                             )                                            
 
-                                        } else {
-                                            res.status(403).send("its not that player turn");
-                                            return;
-                                        }
+                                        // } else {
+                                        //     res.status(403).send("its not that player turn");
+                                        //     return;
+                                        // }
                                     }
                                 }
                             )

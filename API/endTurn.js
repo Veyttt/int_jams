@@ -4,7 +4,7 @@ const connection = require('../database');
 
 router.put("/endturn", (req, res) => {
     console.log("endpoint=endturn");
-    var match_id = req.body.match_id;
+    var match_id = req.session.matchID;
     playerID = req.session.playerID;
     connection.execute('UPDATE playermatch SET has_moved = FALSE, has_used_a_cassette = FALSE, random_cassettes_optained = FALSE WHERE playermatch_match_id = ?', [match_id], (err, results) => {
         if (err) {

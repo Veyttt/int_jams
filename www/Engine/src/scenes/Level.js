@@ -800,6 +800,12 @@ class Level extends Phaser.Scene {
 		text_2.text = "Target";
 		text_2.setStyle({ "color": "#ff7e7eff", "fontSize": "20px", "fontStyle": "bold" });
 
+		// state text
+		const state_text = this.add.text(240, 25, "", {});
+		state_text.text = "";
+		state_text.setStyle({ "color": "#ff7e7eff", "fontSize": "30px", "fontStyle": "bold" });
+
+
 		// leave_match_button
 		const leave_match_button = new end_turn_button(this, 1077, 613);
 		this.add.existing(leave_match_button);
@@ -807,26 +813,6 @@ class Level extends Phaser.Scene {
 		// end_turn_button_pf
 		const end_turn_button_pf = new End_turn_button_pf(this, 1062, 111);
 		this.add.existing(end_turn_button_pf);
-
-		// meteor_hazard_prefab
-		const meteor_hazard_prefab = new Meteor_hazard_prefab(this, 233, 231);
-		this.add.existing(meteor_hazard_prefab);
-
-		// meteor_hazard_prefab_1
-		const meteor_hazard_prefab_1 = new Meteor_hazard_prefab(this, 235, 490);
-		this.add.existing(meteor_hazard_prefab_1);
-
-		// meteor_hazard_prefab_4
-		const meteor_hazard_prefab_4 = new Meteor_hazard_prefab(this, 563, 489);
-		this.add.existing(meteor_hazard_prefab_4);
-
-		// meteor_hazard_prefab_6
-		const meteor_hazard_prefab_6 = new Meteor_hazard_prefab(this, 559, 231);
-		this.add.existing(meteor_hazard_prefab_6);
-
-		// meteor_hazard_prefab_2
-		const meteor_hazard_prefab_2 = new Meteor_hazard_prefab(this, 299, 360);
-		this.add.existing(meteor_hazard_prefab_2);
 
 		// lists
 		const list_tile = [tile_121, tile_122, tile_124, tile_123, tile_126, tile_125, tile_118, tile_117, tile_120, tile_119, tile_116, tile_115, tile_114, tile_113, tile_85, tile_86, tile_88, tile_87, tile_112, tile_111, tile_109, tile_110, tile_108, tile_107, tile_103, tile_104, tile_91, tile_92, tile_90, tile_89, tile_93, tile_94, tile_96, tile_95, tile_106, tile_105, tile_101, tile_102, tile_97, tile_98, tile_100, tile_99, tile_57, tile_58, tile_60, tile_59, tile_84, tile_83, tile_81, tile_82, tile_80, tile_79, tile_75, tile_76, tile_63, tile_64, tile_62, tile_61, tile_65, tile_66, tile_68, tile_67, tile_78, tile_77, tile_73, tile_74, tile_69, tile_70, tile_72, tile_71, tile_29, tile_30, tile_32, tile_31, tile_56, tile_55, tile_53, tile_54, tile_52, tile_51, tile_47, tile_48, tile_35, tile_36, tile_34, tile_33, tile_37, tile_38, tile_40, tile_39, tile_50, tile_49, tile_45, tile_46, tile_41, tile_42, tile_44, tile_43, tile_15, tile_16, tile_14, tile_13, tile_18, tile_17, tile_21, tile_22, tile_11, tile_12, tile_10, tile_9, tile_5, tile_6, tile_8, tile_7, tile_20, tile_19, tile_23, tile_24, tile_26, tile_25, tile_27, tile_28, tile_3, tile_4, tile_2, tile_1];
@@ -1369,6 +1355,7 @@ class Level extends Phaser.Scene {
 		this.leave_match_button = leave_match_button;
 		this.end_turn_button_pf = end_turn_button_pf;
 		this.list_tile = list_tile;
+		this.state_text = state_text;
 
 		this.events.emit("scene-awake");
 	}
@@ -1656,6 +1643,8 @@ class Level extends Phaser.Scene {
 		console.log('editor created');
 		setInterval(()=>{
 			this.getPlayersPositions();
+			this.getHazardPositions();
+			this.getPlayerTurn();
 		},5000); // 2000ms = 2s
 		
 
@@ -1944,6 +1933,7 @@ this.end_turn_button_pf.on('pointerover', (pointer) => {
 	this.descriptionText.setPosition(pointer.x - 200, pointer.y + 10); // Adjust position as needed
 	this.descriptionText.setVisible(true);
 });
+
 this.end_turn_button_pf.on('pointerout', () => {
 
 	this.end_turn_button_pf.setTint(0xffffff); 
@@ -1959,6 +1949,8 @@ this.end_turn_button_pf.on('pointerout', () => {
 	this.descriptionText.setVisible(false);
 
 });
+
+this.end_turn_button_pf.visible = false;
 
 this.leave_match_button.on('pointermove', (pointer) => {
 	this.descriptionText.setPosition(pointer.x - 200, pointer.y + 10); // Adjust position as needed
@@ -1978,7 +1970,9 @@ this.end_turn_button_pf.setTint(0xffffff);
 
 
 ////////////////////////////////////////////////////////////////
-		this.getPlayersPositions()
+		this.getPlayersPositions();
+		this.getHazardPositions();
+		this.getPlayerTurn();
 		this.p1_pf.setInteractive();
 		this.p1_pf.on('pointerover', (pointer) => {
 			this.p1_pf.setTint(0x0fefff); 
@@ -2074,6 +2068,47 @@ this.end_turn_button_pf.setTint(0xffffff);
 		xhttp.send();
 	} 
 
+	getHazardPositions(){
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = () => {
+			if (xhttp.readyState == 4) {
+				console.log("/getHazardPositions | " + xhttp.status + " | " + xhttp.responseText)
+				var data = JSON.parse(xhttp.responseText);
+				data.tiles.forEach((hazard) => {
+					console.log(hazard);
+					this.spawnCassette(hazard.tile_id, true);
+				});
+			}
+		};
+		xhttp.open("GET", "/useCassette/getTiles", true);
+		xhttp.send();
+	
+
+	}
+
+	getPlayerTurn(){
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = () => {
+			if (xhttp.readyState == 4) {
+				console.log("/playerTurn | " + xhttp.status + " | " + xhttp.responseText)
+				var data = JSON.parse(xhttp.responseText);
+				if (data.turn)
+					{
+						this.state_text.text = "Your Turn! Do it! ⚔️";
+						this.end_turn_button_pf.visible = true;
+					}
+				else
+					{
+						this.state_text.text = "Wait for your turn! 🕰️";
+						this.end_turn_button_pf.visible = false;
+					}
+			}
+		};
+		xhttp.open("GET", "/useCassette/playerTurn", true);
+		xhttp.send();
+	}
+
+
 
 	getPlayersPositions() {
 		var xhttp = new XMLHttpRequest();
@@ -2157,17 +2192,22 @@ this.end_turn_button_pf.setTint(0xffffff);
 		var player_cassette_id = 1
 
 		var xhttp = new XMLHttpRequest();
-		xhttp.onreadystatechange = function() {
-			if (this.readyState == 4) {
-				if (this.status == 200)
-					console.log(this.responseText)
+		xhttp.onreadystatechange = () => {
+			if (xhttp.readyState == 4) {
+				console.log("/useCassette/UseMeteorCassette | " + xhttp.status + " | " + xhttp.responseText);
 
-				if (this.status != 403)
-					this.spawnCassette(tile.tileID);
+				// TODO: COmmented out. 
+				// if (xhttp.status == 200)
+				// 	console.log(xhttp.responseText)
+
+				// if (xhttp.status != 403)
+				// 	this.spawnCassette(tile_id);
 
 				// this.getPlayerPosition(playerID);
 			}																	//Move Function
 		};
+
+
 
 		var data = {
 			"player_cassette_id": player_cassette_id,
@@ -2176,7 +2216,7 @@ this.end_turn_button_pf.setTint(0xffffff);
 		var jsonData = JSON.stringify(data);
 		console.log(jsonData);
 
-		xhttp.open("POST", "/useCassette/UseHazardCassette");
+		xhttp.open("POST", "/useCassette/UseMeteorCassette");
 		xhttp.setRequestHeader("Content-Type", "application/json");
 		xhttp.send(jsonData);
 	};
@@ -2232,6 +2272,8 @@ this.end_turn_button_pf.setTint(0xffffff);
 			}
 		};
 
+		this.state_text.text = "Not your turn! Wait for your turn! 🕰️";
+		this.end_turn_button_pf.visible = false;
 		xhttp.open("GET", "/matches", true);
 		xhttp.send();
 	};
@@ -2256,18 +2298,34 @@ this.end_turn_button_pf.setTint(0xffffff);
 		var jsonData = JSON.stringify(data);
 		xhttp.send(jsonData); 
 	};
-	spawnCassette(tile){
-		console.log('spawning_hazard')
-		const meteor_prefab = new Meteor_hazard_prefab(this, tile.x, tile.y);
+	spawnCassette(tileID, music){
+		var realTileInGame = null
+		this.list_tile.forEach((tile) => {
+			if (tile.name == "tile_" + tileID)
+				{
+					realTileInGame = tile
+				}
+		})
+
+		if (!realTileInGame)
+		{
+			console.log("Opsi dopsi. Can't get real tile :(");
+			return;
+		}
+
+
+		const meteor_prefab = new Meteor_hazard_prefab(this, realTileInGame.x, realTileInGame.y);
 		this.add.existing(meteor_prefab);
-		this.cassette1sound.play({
-    		volume: 0.3
-		});
+
+		if (music)
+			this.cassette1sound.play({
+				volume: 0.3
+			});
 		
 		
 	}
 	winState(tileID){
-		if (this.p1_pf.x > 624 || this.p2_pf>624 ){
+		if (this.p1_pf.x > 624 || this.p2_pf > 624 ){
 			alert("Congratulations! You have won the game!");
 			window.location.replace('/MainPage.html');
 		} else {'its not win yet'}
